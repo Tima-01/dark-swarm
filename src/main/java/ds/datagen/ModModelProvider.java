@@ -1,6 +1,5 @@
 package ds.datagen;
 
-import com.ibm.icu.text.Normalizer2;
 import ds.item.ModItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;

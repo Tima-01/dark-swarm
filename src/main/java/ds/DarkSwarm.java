@@ -1,7 +1,10 @@
 package ds;
 
+import ds.block.entity.ModBlockEntities;
 import ds.datagen.ModLootTableProvider;
+import ds.item.ModItemGroups;
 import ds.item.ModItems;
+import ds.screen.ModScreenHandlers;
 import net.fabricmc.api.ModInitializer;
 
 import ds.util.ModLootTableModifiers;
@@ -18,7 +21,10 @@ public class DarkSwarm implements ModInitializer {
 	public void onInitialize() {
 		LOGGER.info("Hello Fabric world!");
 
+		ModItemGroups.registerItemGroups();
 		ModItems.registerModItems();
 		ModLootTableModifiers.modifyLootTables();
+		ModBlockEntities.registerBlockEntities();
+		ModScreenHandlers.registerScreenHandlers();
 	}
 }

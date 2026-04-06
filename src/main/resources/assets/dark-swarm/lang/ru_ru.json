@@ -1,3 +1,5 @@
 {
-  "item.dark-swarm.soul": "Душа"
+  "itemgroup.dark-swarm.dark_swarm_items": "Тимик добавь моба",
+  "item.dark-swarm.soul": "Душа",
+  "block.dark-swarm.summoning_cauldron": "Чан призыва"
 }

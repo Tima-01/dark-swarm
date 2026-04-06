@@ -1,3 +1,5 @@
 {
-  "item.dark-swarm.soul": "Soul"
+  "itemgroup.dark-swarm.dark_swarm_items": "Dark Swarm",
+  "item.dark-swarm.soul": "Soul",
+  "block.dark-swarm.summoning_cauldron": "Summoning cauldron"
 }
