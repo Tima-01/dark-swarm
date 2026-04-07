@@ -5,10 +5,7 @@ import ds.block.entity.custom.SummoningCauldronEntity;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
-import net.minecraft.util.ItemActionResult;
 import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
@@ -77,7 +74,7 @@ public class SummoningCauldron extends BlockWithEntity implements BlockEntityPro
     protected ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
 
         if(world.getBlockEntity(pos) instanceof SummoningCauldronEntity summoningCauldronEntity) {
-            if(player.isSneaking() && !world.isClient()) {
+            if(!world.isClient()) {
                 player.openHandledScreen(summoningCauldronEntity);
             }
         }

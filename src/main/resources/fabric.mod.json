@@ -18,9 +18,9 @@
 		"main": [
 			"ds.DarkSwarm"
 		],
-		"client": [
-			"ds.DarkSwarmClient"
-		],
+        "client": [
+            "ds.DarkSwarmClient"
+        ],
 		"fabric-datagen": [
 			"ds.DarkSwarmDataGenerator"
 		]

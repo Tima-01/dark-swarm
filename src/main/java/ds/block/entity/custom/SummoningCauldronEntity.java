@@ -22,7 +22,7 @@ import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import org.jetbrains.annotations.Nullable;
 
-public class SummoningCauldronEntity extends BlockEntity implements ImplementedInventory, ExtendedScreenHandlerFactory {
+public class SummoningCauldronEntity extends BlockEntity implements ImplementedInventory, ExtendedScreenHandlerFactory<BlockPos> {
 
     private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(1, ItemStack.EMPTY);
 
@@ -47,6 +47,21 @@ public class SummoningCauldronEntity extends BlockEntity implements ImplementedI
         Inventories.readNbt(nbt, inventory, registryLookup);
     }
 
+    @Override
+    public BlockPos getScreenOpeningData(ServerPlayerEntity player) {
+        return this.pos;
+    }
+
+    @Override
+    public Text getDisplayName() {
+        return Text.translatable("gui.dark-swarm.summoning_cauldron");
+    }
+
+    @Override
+    public @Nullable ScreenHandler createMenu(int syncId, PlayerInventory playerInventory, PlayerEntity player) {
+        return new SummoningCauldronScreenHandler(syncId, playerInventory, this.pos);
+    }
+
     @Nullable
     @Override
     public Packet<ClientPlayPacketListener> toUpdatePacket() {
@@ -56,20 +71,5 @@ public class SummoningCauldronEntity extends BlockEntity implements ImplementedI
     @Override
     public NbtCompound toInitialChunkDataNbt(RegistryWrapper.WrapperLookup registryLookup) {
         return createNbt(registryLookup);
-    }
-
-    @Override
-    public Object getScreenOpeningData(ServerPlayerEntity serverPlayerEntity) {
-        return this.pos;
-    }
-
-    @Override
-    public Text getDisplayName() {
-        return Text.literal("Summoning Cauldron");
-    }
-
-    @Override
-    public @Nullable ScreenHandler createMenu(int syncId, PlayerInventory playerInventory, PlayerEntity player) {
-        return new SummoningCauldronScreenHandler(syncId, playerInventory, this.pos);
     }
 }
