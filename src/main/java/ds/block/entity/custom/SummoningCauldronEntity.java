@@ -54,7 +54,7 @@ public class SummoningCauldronEntity extends BlockEntity implements ImplementedI
 
     @Override
     public Text getDisplayName() {
-        return Text.literal("Summoning Cauldron");
+        return Text.translatable("gui.dark-swarm.summoning_cauldron");
     }
 
     @Override
