@@ -77,7 +77,7 @@ public class SummoningCauldron extends BlockWithEntity implements BlockEntityPro
     protected ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
 
         if(world.getBlockEntity(pos) instanceof SummoningCauldronEntity summoningCauldronEntity) {
-            if(player.isSneaking() && !world.isClient()) {
+            if(!world.isClient()) {
                 player.openHandledScreen(summoningCauldronEntity);
             }
         }

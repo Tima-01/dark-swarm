@@ -1,5 +1,7 @@
 package ds.screen.custom;
 
+import ds.block.entity.custom.SummoningCauldronEntity;
+import ds.item.ModItems;
 import ds.screen.ModScreenHandlers;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -12,13 +14,16 @@ import net.minecraft.util.math.BlockPos;
 
 public class SummoningCauldronScreenHandler extends ScreenHandler {
     private final Inventory inventory;
+    private final BlockPos pos;
 
     public SummoningCauldronScreenHandler(int syncId, PlayerInventory playerInventory, BlockPos pos) {
-        this(syncId, playerInventory, playerInventory.player.getWorld().getBlockEntity(pos));
+        this(syncId, playerInventory, pos, playerInventory.player.getWorld().getBlockEntity(pos));
     }
 
-    public SummoningCauldronScreenHandler(int syncId, PlayerInventory playerInventory, BlockEntity blockEntity) {
+    public SummoningCauldronScreenHandler(int syncId, PlayerInventory playerInventory, BlockPos pos, BlockEntity blockEntity) {
         super(ModScreenHandlers.SUMMONING_CAULDRON_SCREEN_HANDLER, syncId);
+
+        this.pos = pos;
         this.inventory = (Inventory) blockEntity;
 
         this.addSlot(new Slot(inventory, 0, 80, 35));
@@ -27,10 +32,50 @@ public class SummoningCauldronScreenHandler extends ScreenHandler {
         addPlayerInventory(playerInventory);
     }
 
+    @Override
+    public boolean onButtonClick(PlayerEntity player, int id) {
+        if (id == 0) {
+            if (player.getWorld().isClient()) return true;
+            ItemStack stack = inventory.getStack(0);
+            if (!stack.isEmpty() && stack.getItem() == ModItems.SOUL) {
+                stack.decrement(1);
+                var world = player.getWorld();
+                var entity = new net.minecraft.entity.mob.ZombieEntity(world);
+                entity.refreshPositionAndAngles(
+                        pos.getX() + 0.5,
+                        pos.getY() + 0.3,
+                        pos.getZ() + 0.5,
+                        0, 0
+                );
+                world.spawnEntity(entity);
+            }
+            return true;
+        }
+        return super.onButtonClick(player, id);
+    }
 
     @Override
-    public ItemStack quickMove(PlayerEntity player, int slot) {
-        return null;
+    public ItemStack quickMove(PlayerEntity player, int invSlot) {
+        ItemStack newStack = ItemStack.EMPTY;
+        Slot slot = this.slots.get(invSlot);
+        if (slot != null && slot.hasStack()) {
+            ItemStack originalStack = slot.getStack();
+            newStack = originalStack.copy();
+            if (invSlot < this.inventory.size()) {
+                if (!this.insertItem(originalStack, this.inventory.size(), this.slots.size(), true)) {
+                    return ItemStack.EMPTY;
+                }
+            } else if (!this.insertItem(originalStack, 0, this.inventory.size(), false)) {
+                return ItemStack.EMPTY;
+            }
+
+            if (originalStack.isEmpty()) {
+                slot.setStack(ItemStack.EMPTY);
+            } else {
+                slot.markDirty();
+            }
+        }
+        return newStack;
     }
 
     @Override
