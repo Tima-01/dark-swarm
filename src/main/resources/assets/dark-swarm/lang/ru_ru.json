@@ -3,5 +3,7 @@
   "item.dark-swarm.soul": "Душа",
   "block.dark-swarm.summoning_cauldron": "Чан призыва",
   "gui.dark-swarm.summoning_cauldron.summon": "Призвать",
-  "gui.dark-swarm.summoning_cauldron": "Чан призыва"
+  "gui.dark-swarm.summoning_cauldron": "Чан призыва",
+  "entity.dark-swarm.minion": "Квакозябра обыкновенная",
+  "item.dark-swarm.minion_spawn_egg": "Яйцо призыва Квакозябры обыкновенной"
 }

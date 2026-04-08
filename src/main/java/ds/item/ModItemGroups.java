@@ -19,6 +19,7 @@ public class ModItemGroups {
                     .entries((displayContext, entries) -> {
                         entries.add(ModItems.SOUL);
                         entries.add(ModBlocks.SUMMONING_CAULDRON);
+                        entries.add(ModItems.MINION_SPAWN_EGG);
                     }).build());
 
     public static void registerItemGroups() {
