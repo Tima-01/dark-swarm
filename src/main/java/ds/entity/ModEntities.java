@@ -11,7 +11,7 @@ import net.minecraft.util.Identifier;
 public class ModEntities {
     public static final EntityType<MinionEntity> MINION = Registry.register(
             Registries.ENTITY_TYPE,
-            Identifier.of("darkswarm", "minion"),
+            Identifier.of("dark-swarm", "minion"),
             EntityType.Builder.create(MinionEntity::new, SpawnGroup.CREATURE)
                     .dimensions(0.6f, 1.8f)
                     .build()

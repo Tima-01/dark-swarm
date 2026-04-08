@@ -3,5 +3,7 @@
   "item.dark-swarm.soul": "Soul",
   "block.dark-swarm.summoning_cauldron": "Summoning cauldron",
   "gui.dark-swarm.summoning_cauldron.summon": "Summon",
-  "gui.dark-swarm.summoning_cauldron": "Summoning cauldron"
+  "gui.dark-swarm.summoning_cauldron": "Summoning cauldron",
+  "entity.dark-swarm.minion": "Cute lil creature",
+  "item.dark-swarm.minion_spawn_egg": "Cute lil creatures spawn egg"
 }

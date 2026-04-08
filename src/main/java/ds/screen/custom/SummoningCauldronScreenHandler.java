@@ -1,6 +1,7 @@
 package ds.screen.custom;
 
 import ds.block.entity.custom.SummoningCauldronEntity;
+import ds.entity.ModEntities;
 import ds.item.ModItems;
 import ds.screen.ModScreenHandlers;
 import net.minecraft.block.entity.BlockEntity;
@@ -40,14 +41,19 @@ public class SummoningCauldronScreenHandler extends ScreenHandler {
             if (!stack.isEmpty() && stack.getItem() == ModItems.SOUL) {
                 stack.decrement(1);
                 var world = player.getWorld();
-                var entity = new net.minecraft.entity.mob.ZombieEntity(world);
-                entity.refreshPositionAndAngles(
-                        pos.getX() + 0.5,
-                        pos.getY() + 0.3,
-                        pos.getZ() + 0.5,
-                        0, 0
-                );
-                world.spawnEntity(entity);
+                var entity = ModEntities.MINION.create(world);
+                if(entity!=null) {
+                    entity.refreshPositionAndAngles(
+                            pos.getX() + 0.5,
+                            pos.getY() + 0.3,
+                            pos.getZ() + 0.5,
+                            0, 0
+                    );
+                    entity.setOwner(player);
+                    entity.setTamed(true, true);
+
+                    world.spawnEntity(entity);
+                }
             }
             return true;
         }
