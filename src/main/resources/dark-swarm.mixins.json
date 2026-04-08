@@ -3,7 +3,8 @@
 	"package": "ds.mixin",
 	"compatibilityLevel": "JAVA_21",
 	"mixins": [
-		"ExampleMixin"
+		"ExampleMixin",
+		"ModEntityDataMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1
