@@ -1,11 +1,8 @@
 package ds.screen.custom;
 
-import ds.block.entity.custom.SummoningCauldronEntity;
 import ds.entity.ModEntities;
 import ds.item.ModItems;
-import ds.networking.ModMessages;
 import ds.screen.ModScreenHandlers;
-import ds.util.IEntityDataSaver;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -13,7 +10,6 @@ import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.slot.Slot;
-import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.math.BlockPos;
 
 public class SummoningCauldronScreenHandler extends ScreenHandler {
@@ -56,12 +52,7 @@ public class SummoningCauldronScreenHandler extends ScreenHandler {
                     entity.setTamed(true, true);
 
                     world.spawnEntity(entity);
-                    if (player instanceof ServerPlayerEntity serverPlayer && player instanceof IEntityDataSaver saver) {
-                        int newCount = saver.darkswarm$getMinionCount() + 1;
-                        saver.darkswarm$setMinionCount(newCount);
-                        ModMessages.sendMinionCountSync(serverPlayer, newCount);
-                    }
-                }
+                                    }
             }
             return true;
         }

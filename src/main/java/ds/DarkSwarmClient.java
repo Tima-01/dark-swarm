@@ -4,7 +4,6 @@ import ds.client.MinionHud;
 import ds.entity.ModEntities;
 import ds.entity.client.MinionModel;
 import ds.entity.client.MinionRenderer;
-import ds.networking.ModMessages;
 import ds.screen.ModScreenHandlers;
 import ds.screen.custom.SummoningCauldronScreen;
 import net.fabricmc.api.ClientModInitializer;
@@ -26,6 +25,7 @@ public class DarkSwarmClient implements ClientModInitializer {
         EntityRendererRegistry.register(ModEntities.MINION, MinionRenderer::new);
 
         HudRenderCallback.EVENT.register(new MinionHud());
-        ModMessages.registerS2CPackets();
+
     }
 }
+

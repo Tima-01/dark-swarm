@@ -1,7 +1,5 @@
 package ds.entity.custom;
 
-import ds.networking.ModMessages;
-import ds.util.IEntityDataSaver;
 import net.minecraft.entity.EntityData;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -9,7 +7,6 @@ import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.passive.TameableEntity;
@@ -18,7 +15,6 @@ import net.minecraft.entity.projectile.ProjectileUtil;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.SwordItem;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.EntityHitResult;
@@ -28,7 +24,7 @@ import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.UUID;
+
 
 public class MinionEntity extends TameableEntity {
 
@@ -68,22 +64,6 @@ public class MinionEntity extends TameableEntity {
         this.targetSelector.add(3, new RevengeGoal(this));
     }
 
-    @Override
-    public void onDeath(DamageSource source) {
-        super.onDeath(source);
-
-        if (!this.getWorld().isClient() && this.getOwner() instanceof ServerPlayerEntity player) {
-            if (player instanceof IEntityDataSaver saver) {
-                int currentCount = saver.darkswarm$getMinionCount();
-
-                int newCount = Math.max(0, currentCount - 1);
-
-                saver.darkswarm$setMinionCount(newCount);
-
-                ModMessages.sendMinionCountSync(player, newCount);
-            }
-        }
-    }
 
     @Override
     public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, @Nullable EntityData entityData) {
