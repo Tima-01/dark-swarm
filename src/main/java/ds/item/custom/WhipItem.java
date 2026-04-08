@@ -14,6 +14,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.attribute.EntityAttributeModifier.Operation;
+import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ProjectileUtil;
 import net.minecraft.item.Item;
@@ -21,6 +22,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ToolItem;
 import net.minecraft.item.ToolMaterial;
 import net.minecraft.registry.tag.BlockTags;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.math.BlockPos;
@@ -65,68 +67,89 @@ public class WhipItem extends ToolItem {
 
     @Override
     public boolean postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-        return true;
-    }
-
-    @Override
-    public void postDamageEntity(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-        stack.damage(1, attacker, EquipmentSlot.MAINHAND);
-    }
-    @Override
-    public TypedActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand) {
-        ItemStack stack = player.getStackInHand(hand);
-
+        if (!(attacker instanceof PlayerEntity player)) return false;
+        World world = player.getWorld();
         if (!world.isClient) {
-            double range = 12.0;   // дальность хлыста
-            double radius = 3.5;   // ширина области
-            double angle = 0.5;    // угол (меньше = шире сектор)
-
-            float damage = 6.0f;
-
-            var start = player.getCameraPosVec(1.0F);
+            double range = 7.0;   // дальность
+            double radius = 2.0;  // ширина
+            double angle = 0.6;
+            float aoeDamage = 2.5f;
             var look = player.getRotationVec(1.0F);
-
-            // создаём зону перед игроком
             var box = player.getBoundingBox()
                     .stretch(look.multiply(range))
                     .expand(radius);
-
-            boolean hitSomething = false;
-
             for (LivingEntity entity : world.getEntitiesByClass(
                     LivingEntity.class,
                     box,
-                    e -> e != player
+                    e -> e != player && e != target
             )) {
-
-                // направление к сущности
-                var dirToEntity = entity.getPos().subtract(player.getPos()).normalize();
-
-                // проверка угла (сектор)
-                double dot = look.dotProduct(dirToEntity);
-
+                var dir = entity.getPos().subtract(player.getPos()).normalize();
+                double dot = look.dotProduct(dir);
                 if (dot > angle) {
-                    hitSomething = true;
-
-                    entity.damage(world.getDamageSources().playerAttack(player), damage);
-
+                    entity.damage(world.getDamageSources().playerAttack(player), aoeDamage);
                     entity.takeKnockback(
-                            0.6,
+                            0.2,
                             player.getX() - entity.getX(),
                             player.getZ() - entity.getZ()
                     );
                 }
             }
+            stack.damage(1, attacker, EquipmentSlot.MAINHAND);
+        }
+        return true;
+    }
 
-            // анимация удара всегда
-            player.swingHand(hand);
+    @Override
+    public TypedActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand) {
+        ItemStack stack = player.getStackInHand(hand);
+        if (!world.isClient) {
+            double range = 256.0;
+            var start = player.getCameraPosVec(1.0F);
+            var look = player.getRotationVec(1.0F);
+            var end = start.add(look.multiply(range));
+            var box = player.getBoundingBox()
+                    .stretch(look.multiply(range))
+                    .expand(2.0);
+            var hit = ProjectileUtil.raycast(
+                    player,
+                    start,
+                    end,
+                    box,
+                    entity -> entity instanceof LivingEntity && entity != player,
+                    range
+            );
+            if (hit != null && hit.getEntity() instanceof LivingEntity target) {
+                double radius = 20.0;
+                for (MobEntity mob : world.getEntitiesByClass(
+                        MobEntity.class,
+                        player.getBoundingBox().expand(radius),
+                        e -> !e.equals(player) && !e.equals(target)
+                )) {
+                    boolean isFriendly =
+                            mob.isTeammate(player) ||
+                                    mob instanceof net.minecraft.entity.passive.TameableEntity tame && tame.getOwner() == player;
 
-            // износ только если кого-то задел
-            if (hitSomething) {
-                stack.damage(1, player, EquipmentSlot.MAINHAND);
+                    if (isFriendly) {
+                        mob.setTarget(target);
+                    }
+                }
+                player.sendMessage(
+                        net.minecraft.text.Text.literal("Цель отмечена"),
+                        true
+                );
+                player.swingHand(hand);
+            } else {
+                player.sendMessage(
+                        net.minecraft.text.Text.literal("Нет цели"),
+                        true
+                );
             }
         }
-
         return TypedActionResult.success(stack, world.isClient());
+    }
+
+    @Override
+    public void postDamageEntity(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+        stack.damage(1, attacker, EquipmentSlot.MAINHAND);
     }
 }
