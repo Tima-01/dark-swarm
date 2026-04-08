@@ -67,41 +67,17 @@ public class MinionEntity extends TameableEntity {
 
     @Override
     public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, @Nullable EntityData entityData) {
-        EntityData data = super.initialize(world, difficulty, spawnReason, entityData);
-
-
-        PlayerEntity closestPlayer = world.getClosestPlayer(this.getX(), this.getY(), this.getZ(), 10.0, false);
-
-        if (closestPlayer != null) {
-
-            this.setOwner(closestPlayer);
-            this.setTamed(true, true);
-
-
-            this.navigation.stop();
-            this.setTarget(null);
-        }
-
-        return data;
+        return super.initialize(world, difficulty, spawnReason, entityData);
     }
+
     @Override
     public void writeCustomDataToNbt(NbtCompound nbt) {
         super.writeCustomDataToNbt(nbt);
-
-        if (this.getOwnerUuid() != null) {
-            nbt.putUuid("OwnerUUID", this.getOwnerUuid());
-        }
     }
 
     @Override
     public void readCustomDataFromNbt(NbtCompound nbt) {
         super.readCustomDataFromNbt(nbt);
-
-        if (nbt.containsUuid("OwnerUUID")) {
-            UUID uuid = nbt.getUuid("OwnerUUID");
-            this.setOwnerUuid(uuid);
-            this.setTamed(true, true);
-        }
     }
     @Override
     public boolean cannotDespawn() {
