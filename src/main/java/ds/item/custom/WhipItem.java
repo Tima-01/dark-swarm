@@ -1,9 +1,8 @@
 package ds.item.custom;
 
-import java.util.List;
-
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.AttributeModifierSlot;
 import net.minecraft.component.type.AttributeModifiersComponent;
@@ -12,8 +11,8 @@ import net.minecraft.component.type.ToolComponent.Rule;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
-import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.attribute.EntityAttributeModifier.Operation;
+import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ProjectileUtil;
@@ -21,15 +20,28 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ToolItem;
 import net.minecraft.item.ToolMaterial;
+import net.minecraft.item.tooltip.TooltipType;
+import net.minecraft.particle.ParticleTypes;
 import net.minecraft.registry.tag.BlockTags;
-import net.minecraft.util.ActionResult;
+import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
+import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.util.List;
+
+import static ds.DarkSwarm.MOD_ID;
 
 public class WhipItem extends ToolItem {
 
+    public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
     public WhipItem(ToolMaterial toolMaterial, Item.Settings settings) {
         super(toolMaterial, settings.component(DataComponentTypes.TOOL, createToolComponent()));
     }
@@ -78,6 +90,7 @@ public class WhipItem extends ToolItem {
             var box = player.getBoundingBox()
                     .stretch(look.multiply(range))
                     .expand(radius);
+            int hitCount = 0;
             for (LivingEntity entity : world.getEntitiesByClass(
                     LivingEntity.class,
                     box,
@@ -92,9 +105,21 @@ public class WhipItem extends ToolItem {
                             player.getX() - entity.getX(),
                             player.getZ() - entity.getZ()
                     );
+                    world.playSound(null, player.getBlockPos(), SoundEvents.ENTITY_PLAYER_ATTACK_SWEEP, SoundCategory.PLAYERS);
+                    hitCount++;
                 }
             }
             stack.damage(1, attacker, EquipmentSlot.MAINHAND);
+            if (target != null) {
+                ((ServerWorld) world).spawnParticles(
+                        ParticleTypes.SWEEP_ATTACK,
+                        target.getX(), target.getBodyY(0.5), target.getZ(),
+                        hitCount,
+                        0.5, 0.5, 0.5,
+                        0.0
+                );
+            }
+//            spawnSweepParticles(world, target, player);
         }
         return true;
     }
@@ -151,5 +176,43 @@ public class WhipItem extends ToolItem {
     @Override
     public void postDamageEntity(ItemStack stack, LivingEntity target, LivingEntity attacker) {
         stack.damage(1, attacker, EquipmentSlot.MAINHAND);
+    }
+
+    @Override
+    public void appendTooltip(ItemStack stack, TooltipContext context, List<Text> tooltip, TooltipType type) {
+        if(Screen.hasShiftDown()){
+            tooltip.add(Text.translatable("tooltip.dark-swarm.whip.tooltip.shiftdown"));
+            tooltip.add(Text.translatable("tooltip.dark-swarm.whip.tooltip.shiftdown1"));
+        } else {
+            tooltip.add(Text.translatable("tooltip.dark-swarm.whip.tooltip"));
+        }
+        super.appendTooltip(stack, context, tooltip, type);
+    }
+
+    private void spawnSweepParticles(World world, LivingEntity target, PlayerEntity player) {
+        if (!world.isClient && target != null && world instanceof ServerWorld serverWorld) {
+            int slices = 15; // количество шагов дуги
+            double maxRadius = 2.0; // максимальное смещение по горизонтали
+            double waveAmplitude = 0; // амплитуда волны по вертикали
+
+            var look = player.getRotationVec(1.0F);
+            var right = look.crossProduct(new Vec3d(0, 1, 0)).normalize(); // вправо от взгляда
+            var up = new Vec3d(0, 1, 0);
+
+            for (int i = 0; i <= slices; i++) {
+                double t = (double) i / slices; // 0..1
+                // смещение справа-налево с небольшой синусоидой
+                double offset = (Math.sin(t * Math.PI) * maxRadius) - (maxRadius/2);
+                double wave = Math.sin(t * Math.PI * 3) * waveAmplitude; // вертикальная волна
+
+                double x = target.getX() + right.x * offset + player.getRandom().nextDouble() * 0.1;
+                double y = target.getBodyY(0.5) + wave + player.getRandom().nextDouble() * 0.1;
+                double z = target.getZ() + right.z * offset + player.getRandom().nextDouble() * 0.1;
+
+                // создаём несколько видов частиц
+                serverWorld.spawnParticles(ParticleTypes.ENCHANTED_HIT, x, y, z, 1, 0, 0, 0, 0);
+                serverWorld.spawnParticles(ParticleTypes.CRIT, x, y, z, 1, 0, 0, 0, 0);
+            }
+        }
     }
 }
