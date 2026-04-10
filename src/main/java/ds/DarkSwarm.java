@@ -6,6 +6,7 @@ import ds.entity.ModEntities;
 import ds.item.ModItemGroups;
 import ds.item.ModItems;
 import ds.screen.ModScreenHandlers;
+import ds.util.ArmorBuffHandler;
 import net.fabricmc.api.ModInitializer;
 
 import ds.util.ModLootTableModifiers;
@@ -29,5 +30,6 @@ public class DarkSwarm implements ModInitializer {
 		ModScreenHandlers.registerScreenHandlers();
 
 		ModEntities.registerModEntities();
+		ArmorBuffHandler.registerArmorBuffsEvent();
 	}
 }

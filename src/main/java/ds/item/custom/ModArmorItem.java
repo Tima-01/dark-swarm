@@ -2,6 +2,7 @@ package ds.item.custom;
 
 import com.google.common.collect.ImmutableMap;
 import ds.item.ModArmorMaterials;
+import ds.util.ArmorUtil;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
@@ -14,7 +15,8 @@ import net.minecraft.world.World;
 
 import java.util.List;
 import java.util.Map;
-
+/**
+ * Handles custom armor buffs, that applies on the player*/
 public class ModArmorItem extends ArmorItem {
     public ModArmorItem(RegistryEntry<ArmorMaterial> material, Type type, Settings settings) {
         super(material, type, settings);
@@ -25,12 +27,12 @@ public class ModArmorItem extends ArmorItem {
                     .put(ModArmorMaterials.SOUL_ARMOR_MATERIAL,
                             List.of(new StatusEffectInstance(StatusEffects.HASTE, 400, 2, false, false),
                                     new StatusEffectInstance(StatusEffects.GLOWING,500,2,false,false))).build();
-
+    /**Check for armor every Tick*/
     @Override
     public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
         if (!world.isClient()) {
             if (entity instanceof PlayerEntity player) {
-                if (hasFullSetOfArmorOn(player)) {
+                if (ArmorUtil.hasFullSetOfArmorOn(player)) {
                     evaluateArmorEffects(player);
                 }
             }
@@ -43,7 +45,7 @@ public class ModArmorItem extends ArmorItem {
             RegistryEntry<ArmorMaterial> mapArmorMaterial = entry.getKey();
             List<StatusEffectInstance> mapStatusEffects = entry.getValue();
 
-            if (hasCorrectArmorOn(mapArmorMaterial, player)) {
+            if (ArmorUtil.hasCorrectArmorOn(mapArmorMaterial, player)) {
                 addStatusEffectForMaterial(player, mapArmorMaterial, mapStatusEffects);
             }
         }
@@ -54,7 +56,7 @@ public class ModArmorItem extends ArmorItem {
         boolean hasPlayerEffect = mapStatusEffect.stream()
                 .allMatch(statusEffectInstance -> player.hasStatusEffect(statusEffectInstance.getEffectType()));
 
-        if (hasCorrectArmorOn(mapArmorMaterial, player) && !hasPlayerEffect) {
+        if (ArmorUtil.hasCorrectArmorOn(mapArmorMaterial, player) && !hasPlayerEffect) {
             for (StatusEffectInstance instance : mapStatusEffect) {
                 player.addStatusEffect(new StatusEffectInstance(instance.getEffectType(),
                         instance.getDuration(), instance.getAmplifier(), instance.isAmbient(), instance.shouldShowParticles()));
@@ -62,28 +64,5 @@ public class ModArmorItem extends ArmorItem {
         }
     }
 
-    private boolean hasCorrectArmorOn(RegistryEntry<ArmorMaterial> material, PlayerEntity player) {
-        for (ItemStack armorStack : player.getInventory().armor) {
-            if (!(armorStack.getItem() instanceof ArmorItem)) {
-                return false;
-            }
-        }
-        ArmorItem boots = ((ArmorItem)player.getInventory().getArmorStack(0).getItem());
-        ArmorItem leggings = ((ArmorItem)player.getInventory().getArmorStack(1).getItem());
-        ArmorItem chestplate = ((ArmorItem)player.getInventory().getArmorStack(2).getItem());
-        ArmorItem helmet = ((ArmorItem)player.getInventory().getArmorStack(3).getItem());
 
-        return helmet.getMaterial() == material &&
-                chestplate.getMaterial() == material &&
-                boots.getMaterial() == material &&
-                leggings.getMaterial() == material;
-    }
-    private boolean hasFullSetOfArmorOn(PlayerEntity player) {
-        ItemStack boots = player.getInventory().getArmorStack(0);
-        ItemStack leggings = player.getInventory().getArmorStack(1);
-        ItemStack chestplate = player.getInventory().getArmorStack(2);
-        ItemStack helmet = player.getInventory().getArmorStack(3);
-
-        return !helmet.isEmpty() && !leggings.isEmpty() && !boots.isEmpty() && !chestplate.isEmpty();
-    }
 }
