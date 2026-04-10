@@ -1,5 +1,11 @@
 {
+  "itemgroup.dark-swarm.dark_swarm_items": "Тимик добавь моба",
   "item.dark-swarm.soul": "Душа",
+  "block.dark-swarm.summoning_cauldron": "Чан призыва",
+  "gui.dark-swarm.summoning_cauldron.summon": "Призвать",
+  "gui.dark-swarm.summoning_cauldron": "Чан призыва",
+  "entity.dark-swarm.minion": "Квакозябра обыкновенная",
+  "item.dark-swarm.minion_spawn_egg": "Яйцо призыва Квакозябры обыкновенной",
   "item.dark-swarm.soul_helmet": "Шлем призывателя",
   "item.dark-swarm.soul_chestplate": "Нагрудник призывателя",
   "item.dark-swarm.soul_boots": "Поножи призывателя",

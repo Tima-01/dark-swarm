@@ -3,7 +3,6 @@ package ds.util;
 import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
 import ds.item.ModItems;
 import net.minecraft.loot.LootPool;
-import net.minecraft.loot.LootTables;
 import net.minecraft.loot.condition.RandomChanceLootCondition;
 import net.minecraft.loot.entry.ItemEntry;
 import net.minecraft.loot.function.SetCountLootFunction;
