@@ -1,3 +1,7 @@
 {
-  "item.dark-swarm.soul": "Soul"
+  "item.dark-swarm.soul": "Soul",
+  "item.dark-swarm.soul_helmet": "Summoner's helmet",
+  "item.dark-swarm.soul_chestplate": "Summoner's chestplate",
+  "item.dark-swarm.soul_boots": "Summoner's boots",
+  "item.dark-swarm.soul_leggings": "Summoner's leggings"
 }

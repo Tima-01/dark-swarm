@@ -1,3 +1,7 @@
 {
-  "item.dark-swarm.soul": "Душа"
+  "item.dark-swarm.soul": "Душа",
+  "item.dark-swarm.soul_helmet": "Шлем призывателя",
+  "item.dark-swarm.soul_chestplate": "Нагрудник призывателя",
+  "item.dark-swarm.soul_boots": "Поножи призывателя",
+  "item.dark-swarm.soul_leggings": "Сапоги призывателя"
 }
