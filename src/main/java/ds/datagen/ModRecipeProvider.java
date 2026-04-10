@@ -47,7 +47,6 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                         .offerTo(recipeExporter);
 
         ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, ModItems.SOUL_BOOTS)
-                        .pattern("")
                         .pattern("A A")
                         .pattern("A A")
                         .input('A', ModItems.SOUL)
