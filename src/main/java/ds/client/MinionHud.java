@@ -13,7 +13,7 @@ public class MinionHud implements HudRenderCallback {
 
     @Override    public void onHudRender(DrawContext drawContext, RenderTickCounter tickCounter) {
         drawContext.drawText(MinecraftClient.getInstance().textRenderer,
-                "ЮНСОП ПРИВЕТ ХИИХХИХИХ", 100, 100, 0xFF0000, true);
+                "АМИНА", 100, 100, 0xFF0000, true);
         MinecraftClient client = MinecraftClient.getInstance();
 
     }}
