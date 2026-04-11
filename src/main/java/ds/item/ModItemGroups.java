@@ -21,6 +21,7 @@ public class ModItemGroups {
                         entries.add(ModBlocks.SUMMONING_CAULDRON);
                         entries.add(ModItems.MINION_SPAWN_EGG);
                         entries.add(ModItems.WHIP);
+                        entries.add(ModItems.OVERLORD_SWORD);
                     }).build());
 
     public static void registerItemGroups() {
