@@ -1,6 +1,10 @@
 {
-  "itemgroup.dark-swarm.dark_swarm_items": "Dark Swarm",
   "item.dark-swarm.soul": "Soul",
+  "item.dark-swarm.soul_helmet": "Summoner's helmet",
+  "item.dark-swarm.soul_chestplate": "Summoner's chestplate",
+  "item.dark-swarm.soul_boots": "Summoner's boots",
+  "item.dark-swarm.soul_leggings": "Summoner's leggings",
+  "itemgroup.dark-swarm.dark_swarm_items": "Dark Swarm",
   "block.dark-swarm.summoning_cauldron": "Summoning cauldron",
   "gui.dark-swarm.summoning_cauldron.summon": "Summon",
   "gui.dark-swarm.summoning_cauldron": "Summoning cauldron",
