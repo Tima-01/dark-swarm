@@ -4,12 +4,9 @@ import ds.client.MinionHud;
 import ds.entity.ModEntities;
 import ds.entity.client.MinionModel;
 import ds.entity.client.MinionRenderer;
-import ds.item.ModItems;
-import ds.item.client.OverlordSwordRenderer;
 import ds.screen.ModScreenHandlers;
 import ds.screen.custom.SummoningCauldronScreen;
 import net.fabricmc.api.ClientModInitializer;
-import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
@@ -27,13 +24,6 @@ public class DarkSwarmClient implements ClientModInitializer {
 
         HudRenderCallback.EVENT.register(new MinionHud());
 
-        OverlordSwordRenderer renderer = new OverlordSwordRenderer();
-
-        BuiltinItemRendererRegistry.INSTANCE.register(
-                ModItems.OVERLORD_SWORD,
-                (stack, mode, matrices, vertexConsumers, light, overlay) ->
-                        renderer.render(stack, mode, matrices, vertexConsumers, light, overlay)
-        );
     }
 }
 
