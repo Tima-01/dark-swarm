@@ -1,20 +1,17 @@
 package ds;
 
 import ds.block.entity.ModBlockEntities;
-import ds.datagen.ModLootTableProvider;
-import ds.enchantment.ModEnchantments;
 import ds.enchantment.ModEnchantmentsEffects;
 import ds.entity.ModEntities;
 import ds.item.ModItemGroups;
 import ds.item.ModItems;
 import ds.screen.ModScreenHandlers;
 import ds.util.ArmorBuffHandler;
-import net.fabricmc.api.ModInitializer;
-
 import ds.util.ModLootTableModifiers;
-
+import net.fabricmc.api.ModInitializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import software.bernie.geckolib.GeckoLib;
 
 public class DarkSwarm implements ModInitializer {
 	public static final String MOD_ID = "dark-swarm";
@@ -30,6 +27,7 @@ public class DarkSwarm implements ModInitializer {
 		ModLootTableModifiers.modifyLootTables();
 		ModBlockEntities.registerBlockEntities();
 		ModScreenHandlers.registerScreenHandlers();
+
 
 		ModEntities.registerModEntities();
 		ArmorBuffHandler.registerArmorBuffsEvent();

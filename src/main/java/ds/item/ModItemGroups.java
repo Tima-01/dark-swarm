@@ -26,6 +26,7 @@ public class ModItemGroups {
                         entries.add(ModItems.SOUL_CHESTPLATE);
                         entries.add(ModItems.SOUL_LEGGINGS);
                         entries.add(ModItems.SOUL_HELMET);
+                        entries.add(ModItems.OVERLORD_SWORD);
                     }).build());
 
     public static void registerItemGroups() {

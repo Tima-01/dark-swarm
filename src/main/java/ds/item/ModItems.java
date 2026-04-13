@@ -3,6 +3,7 @@ package ds.item;
 import ds.DarkSwarm;
 import ds.item.custom.ModArmorItem;
 import ds.entity.ModEntities;
+import ds.item.custom.OverlordSwordItem;
 import ds.item.custom.WhipItem;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.item.ArmorItem;
@@ -19,6 +20,9 @@ public class ModItems {
             new SpawnEggItem(ModEntities.MINION, 0xa16228, 0x198717, new Item.Settings()));
     public static final Item WHIP = registerItem("whip",
             new WhipItem(ModToolMaterials.IRON, new Item.Settings().attributeModifiers(WhipItem.createAttributeModifiers(ModToolMaterials.IRON, 1, -2.0f))));
+
+    public static final Item OVERLORD_SWORD = registerItem("overlord_sword",
+            new OverlordSwordItem(ModToolMaterials.IRON, new Item.Settings().attributeModifiers(OverlordSwordItem.createAttributeModifiers(ModToolMaterials.IRON, 7, -1.0f))));
 
     //предметы брони
     public static final Item SOUL_HELMET = registerItem("soul_helmet",
@@ -52,6 +56,8 @@ public class ModItems {
             entries.add(SOUL_CHESTPLATE);
             entries.add(SOUL_BOOTS);
             entries.add(SOUL_LEGGINGS);
+
+            entries.add(OVERLORD_SWORD);
         });
     }
 }
