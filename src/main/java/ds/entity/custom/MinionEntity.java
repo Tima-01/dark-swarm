@@ -1,5 +1,6 @@
 package ds.entity.custom;
 
+import ds.item.custom.WhipItem;
 import net.minecraft.entity.EntityData;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -85,16 +86,9 @@ public class MinionEntity extends TameableEntity {
         return this.isTamed() || super.cannotDespawn();
     }
 
-
-
-    public boolean isCommandMode() {
-        LivingEntity owner = this.getOwner();
-        return owner instanceof PlayerEntity && owner.getMainHandStack().getItem() instanceof SwordItem;
-    }
-
     public boolean isCommanding() {
         LivingEntity owner = this.getOwner();
-        return owner instanceof PlayerEntity p && p.getMainHandStack().getItem() instanceof SwordItem && p.isSneaking();
+        return owner instanceof PlayerEntity p && p.getMainHandStack().getItem() instanceof WhipItem && p.isSneaking();
     }
 
 

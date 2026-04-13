@@ -2,6 +2,7 @@ package ds.item;
 
 import ds.DarkSwarm;
 import ds.block.ModBlocks;
+import ds.item.custom.ModArmorItem;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
@@ -21,6 +22,10 @@ public class ModItemGroups {
                         entries.add(ModBlocks.SUMMONING_CAULDRON);
                         entries.add(ModItems.MINION_SPAWN_EGG);
                         entries.add(ModItems.WHIP);
+                        entries.add(ModItems.SOUL_BOOTS);
+                        entries.add(ModItems.SOUL_CHESTPLATE);
+                        entries.add(ModItems.SOUL_LEGGINGS);
+                        entries.add(ModItems.SOUL_HELMET);
                     }).build());
 
     public static void registerItemGroups() {

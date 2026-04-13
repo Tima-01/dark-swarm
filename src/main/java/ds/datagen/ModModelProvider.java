@@ -32,7 +32,6 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.registerArmor(((ArmorItem) ModItems.SOUL_BOOTS));
         itemModelGenerator.registerArmor(((ArmorItem) ModItems.SOUL_CHESTPLATE));
         itemModelGenerator.registerArmor(((ArmorItem) ModItems.SOUL_LEGGINGS));
-        itemModelGenerator.register(ModItems.MINION_SPAWN_EGG, new Model(Optional.of(Identifier.of("item/template_spawn_egg")), Optional.empty()));
-        itemModelGenerator.register(ModItems.WHIP, Models.HANDHELD);
+//        itemModelGenerator.register(ModItems.WHIP, Models.HANDHELD);
     }
 }

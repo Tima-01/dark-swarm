@@ -5,6 +5,7 @@ import ds.item.custom.ModArmorItem;
 import ds.entity.ModEntities;
 import ds.item.custom.WhipItem;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
+import net.minecraft.item.ArmorItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroups;
 import net.minecraft.item.SpawnEggItem;
@@ -17,7 +18,7 @@ public class ModItems {
     public static final Item MINION_SPAWN_EGG = registerItem("minion_spawn_egg",
             new SpawnEggItem(ModEntities.MINION, 0xa16228, 0x198717, new Item.Settings()));
     public static final Item WHIP = registerItem("whip",
-            new WhipItem(ToolMaterials.IRON, new Item.Settings().attributeModifiers(WhipItem.createAttributeModifiers(ToolMaterials.IRON, 2, -2.0f))));
+            new WhipItem(ModToolMaterials.IRON, new Item.Settings().attributeModifiers(WhipItem.createAttributeModifiers(ModToolMaterials.IRON, 1, -2.0f))));
 
     //предметы брони
     public static final Item SOUL_HELMET = registerItem("soul_helmet",

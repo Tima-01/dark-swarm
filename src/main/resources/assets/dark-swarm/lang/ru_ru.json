@@ -1,18 +1,28 @@
 {
-  "itemgroup.dark-swarm.dark_swarm_items": "Тимик добавь моба",
+  "itemgroup.dark-swarm.dark_swarm_items": "Темный рой",
+
   "item.dark-swarm.soul": "Душа",
-  "block.dark-swarm.summoning_cauldron": "Чан призыва",
-  "gui.dark-swarm.summoning_cauldron.summon": "Призвать",
-  "gui.dark-swarm.summoning_cauldron": "Чан призыва",
-  "entity.dark-swarm.minion": "Квакозябра обыкновенная",
   "item.dark-swarm.minion_spawn_egg": "Яйцо призыва Квакозябры обыкновенной",
   "item.dark-swarm.whip": "Хлыст",
-  "tooltip.dark-swarm.whip.tooltip": "Наносит урон в веерообразной области. ПКМ для выбора цели миньонов.",
-  "tooltip.dark-swarm.whip.tooltip.shiftdown": "Наносит половину основного урона в веерообразной области на расстоянии 7 блоков.",
-  "tooltip.dark-swarm.whip.tooltip.shiftdown1": "ПКМ для выбора цели атаки миньонов.",
-  "item.dark-swarm.minion_spawn_egg": "Яйцо призыва Квакозябры обыкновенной",
   "item.dark-swarm.soul_helmet": "Шлем призывателя",
   "item.dark-swarm.soul_chestplate": "Нагрудник призывателя",
   "item.dark-swarm.soul_boots": "Поножи призывателя",
-  "item.dark-swarm.soul_leggings": "Сапоги призывателя"
+  "item.dark-swarm.soul_leggings": "Сапоги призывателя",
+
+  "block.dark-swarm.summoning_cauldron": "Чан призыва",
+
+  "gui.dark-swarm.summoning_cauldron.summon": "Призвать",
+  "gui.dark-swarm.summoning_cauldron": "Чан призыва",
+
+  "entity.dark-swarm.minion": "Квакозябра обыкновенная",
+
+  "tooltip.dark-swarm.whip.tooltip": "Наносит урон в веерообразной области. ПКМ для выбора цели миньонов.",
+  "tooltip.dark-swarm.whip.tooltip.shiftdown": "Наносит половину основного урона в веерообразной области на расстоянии 7 блоков.",
+  "tooltip.dark-swarm.whip.tooltip.shiftdown1": "ПКМ для выбора цели атаки миньонов.",
+
+  "whip_text.dark-swarm.target_acquired": "Цель отмечена",
+  "whip_text.dark-swarm.target_not_found": "Нет цели",
+
+  "enchantment.dark-swarm.longwhip": "Длинный хлыст",
+  "enchantment.dark-swarm.wideswing": "Широкий размах"
 }

@@ -2,6 +2,8 @@ package ds;
 
 import ds.block.entity.ModBlockEntities;
 import ds.datagen.ModLootTableProvider;
+import ds.enchantment.ModEnchantments;
+import ds.enchantment.ModEnchantmentsEffects;
 import ds.entity.ModEntities;
 import ds.item.ModItemGroups;
 import ds.item.ModItems;
@@ -31,5 +33,6 @@ public class DarkSwarm implements ModInitializer {
 
 		ModEntities.registerModEntities();
 		ArmorBuffHandler.registerArmorBuffsEvent();
+		ModEnchantmentsEffects.registerEnchantmentEffects();
 	}
 }

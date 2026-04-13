@@ -30,7 +30,6 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .input('K', Items.LEATHER)
                 .criterion(hasItem(Items.IRON_INGOT), conditionsFromItem(Items.IRON_INGOT))
                 .offerTo(exporter);
-    public void generate(RecipeExporter recipeExporter) {
         /** Recipe generation for crafting custom modded armor, uses ShapedRecipeJsonBuilder to then  define the shape/pattern of the craftable item
          for example the helmet is:
          SSS
@@ -41,7 +40,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .pattern("A A")
                 .input('A', ModItems.SOUL)
                 .criterion("has_soul", InventoryChangedCriterion.Conditions.items(ModItems.SOUL))
-                .offerTo(recipeExporter);
+                .offerTo(exporter);
 
         ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, ModItems.SOUL_CHESTPLATE)
                         .pattern("A A")
@@ -49,7 +48,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                         .pattern("AAA")
                         .input('A', ModItems.SOUL)
                         .criterion("has_soul", InventoryChangedCriterion.Conditions.items(ModItems.SOUL))
-                        .offerTo(recipeExporter);
+                        .offerTo(exporter);
 
         ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, ModItems.SOUL_LEGGINGS)
                         .pattern("AAA")
@@ -57,15 +56,13 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                         .pattern("A A")
                         .input('A', ModItems.SOUL)
                         .criterion("has_soul", InventoryChangedCriterion.Conditions.items(ModItems.SOUL))
-                        .offerTo(recipeExporter);
+                        .offerTo(exporter);
 
         ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, ModItems.SOUL_BOOTS)
                         .pattern("A A")
                         .pattern("A A")
                         .input('A', ModItems.SOUL)
                         .criterion("has_soul", InventoryChangedCriterion.Conditions.items(ModItems.SOUL))
-                        .offerTo(recipeExporter);
-
-
+                        .offerTo(exporter);
     }
 }
