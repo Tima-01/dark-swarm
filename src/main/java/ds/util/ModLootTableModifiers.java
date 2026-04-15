@@ -21,15 +21,23 @@ public class ModLootTableModifiers {
             = Identifier.of("minecraft", "entities/enderman");
     private static final Identifier SPIDER_ID
             = Identifier.of("minecraft", "entities/spider");
+    private static final Identifier VILLAGER_ID
+            = Identifier.of("minecraft", "entities/villager");
     public static void modifyLootTables() {
         LootTableEvents.MODIFY.register((key, tableBuilder, source, registry) -> {
             if(CREEPER_ID.equals(key.getValue()) || ZOMBIE_ID.equals(key.getValue()) || SKELETON_ID.equals(key.getValue()) || ENDERMAN_ID.equals(key.getValue()) || SPIDER_ID.equals(key.getValue())) {
                 LootPool.Builder poolBuilder = LootPool.builder()
                         .rolls(ConstantLootNumberProvider.create(1))
                         .conditionally(RandomChanceLootCondition.builder(0.05f)) // Drops 5% of the time
+                        .with(ItemEntry.builder(ModItems.PROFANED_SOUL))
+                        .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0f, 1.0f)).build());
+                tableBuilder.pool(poolBuilder.build());
+            }else if(VILLAGER_ID.equals(key.getValue())) {
+                LootPool.Builder poolBuilder = LootPool.builder()
+                        .rolls(ConstantLootNumberProvider.create(1))
+                        .conditionally(RandomChanceLootCondition.builder(0.5f)) // Drops 5% of the time
                         .with(ItemEntry.builder(ModItems.SOUL))
                         .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0f, 1.0f)).build());
-
                 tableBuilder.pool(poolBuilder.build());
             }
         });

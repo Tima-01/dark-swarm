@@ -16,6 +16,7 @@ import net.minecraft.util.Identifier;
 
 public class ModItems {
     public static final Item SOUL = registerItem("soul", new Item(new Item.Settings()));
+    public static final Item PROFANED_SOUL = registerItem("profaned_soul", new Item(new Item.Settings()));
     public static final Item MINION_SPAWN_EGG = registerItem("minion_spawn_egg",
             new SpawnEggItem(ModEntities.MINION, 0xa16228, 0x198717, new Item.Settings()));
     public static final Item WHIP = registerItem("whip",

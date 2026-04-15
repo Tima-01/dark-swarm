@@ -5,6 +5,7 @@ import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.render.RenderTickCounter;
+import net.minecraft.text.Text;
 
 
 /**
@@ -39,10 +40,9 @@ public class ArmorBuffCountScreen {
         drawContext.fill(x, y, x + 140, y + 20, 0x80000000); // Полупрозрачный черный
 
         // Draw text
-        String text = "Affected minions: " + buffedCount;
         drawContext.drawText(
                 client.textRenderer,
-                text,
+                Text.translatable("gui.dark-swarm.affected_minions", buffedCount),
                 x + 5,
                 y + 6,
                 0xFFFFFF,  // Белый цвет

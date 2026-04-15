@@ -19,6 +19,7 @@ public class ModItemGroups {
                     .displayName(Text.translatable("itemgroup.dark-swarm.dark_swarm_items"))
                     .entries((displayContext, entries) -> {
                         entries.add(ModItems.SOUL);
+                        entries.add(ModItems.PROFANED_SOUL);
                         entries.add(ModBlocks.SUMMONING_CAULDRON);
                         entries.add(ModItems.MINION_SPAWN_EGG);
                         entries.add(ModItems.WHIP);
