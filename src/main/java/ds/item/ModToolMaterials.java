@@ -14,7 +14,7 @@ import java.util.Objects;
 import java.util.function.Supplier;
 
 public enum ModToolMaterials implements ToolMaterial {
-    IRON(BlockTags.INCORRECT_FOR_IRON_TOOL, 250, 6.0F, 2.0F, 14, () -> Ingredient.ofItems(new ItemConvertible[]{Items.IRON_INGOT}));
+    IRON(BlockTags.INCORRECT_FOR_IRON_TOOL, 250, 6.0F, 0.5F, 14, () -> Ingredient.ofItems(new ItemConvertible[]{Items.IRON_INGOT}));
 
     private final TagKey<Block> inverseTag;
     private final int itemDurability;

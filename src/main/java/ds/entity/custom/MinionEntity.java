@@ -19,12 +19,12 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.hit.HitResult;
-import net.minecraft.util.math.Box;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.UUID;
 
 public class MinionEntity extends TameableEntity {
 
@@ -85,6 +85,13 @@ public class MinionEntity extends TameableEntity {
         return this.isTamed() || super.cannotDespawn();
     }
 
+
+
+    public boolean isCommandMode() {
+        LivingEntity owner = this.getOwner();
+        return owner instanceof PlayerEntity && owner.getMainHandStack().getItem() instanceof SwordItem;
+    }
+
     public boolean isCommanding() {
         LivingEntity owner = this.getOwner();
         return owner instanceof PlayerEntity p && p.getMainHandStack().getItem() instanceof SwordItem && p.isSneaking();
@@ -94,6 +101,8 @@ public class MinionEntity extends TameableEntity {
     public boolean isBusyFighting() {
         return this.getTarget() != null && this.getTarget().isAlive();
     }
+
+
 
     public static class MinionSwordCommandGoal extends Goal {
         private final MinionEntity minion;
@@ -112,18 +121,11 @@ public class MinionEntity extends TameableEntity {
             PlayerEntity owner = (PlayerEntity) minion.getOwner();
             if (owner == null) return;
 
-            Vec3d eyePos = owner.getEyePos();
-            Vec3d lookVec = owner.getRotationVec(1.0F);
-            Vec3d traceVec = eyePos.add(lookVec.multiply(50.0));
-            Box searchBox = owner.getBoundingBox().stretch(lookVec.multiply(50.0)).expand(1.0D);
-
             EntityHitResult entityHit = ProjectileUtil.raycast(
-                    owner,
-                    eyePos,
-                    traceVec,
-                    searchBox,
-                    entity -> !entity.isSpectator() && entity.isAlive() && entity instanceof LivingEntity,
-                    50.0 * 50.0
+                    owner, owner.getCameraPosVec(1.0F),
+                    owner.getCameraPosVec(1.0F).add(owner.getRotationVec(1.0F).multiply(50.0)),
+                    owner.getBoundingBox().stretch(owner.getRotationVec(1.0F).multiply(50.0)).expand(1.0D),
+                    entity -> !entity.isSpectator() && entity instanceof LivingEntity, 50.0
             );
 
             if (entityHit != null && entityHit.getEntity() instanceof LivingEntity target) {
@@ -166,8 +168,6 @@ public class MinionEntity extends TameableEntity {
             if (owner == null || minion.isSitting() || minion.isCommanding() || minion.isBusyFighting()) return false;
             return minion.squaredDistanceTo(owner) > (double)(minDistance * minDistance);
         }
-
-
 
         @Override
         public void tick() {

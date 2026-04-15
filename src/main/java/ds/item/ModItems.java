@@ -2,7 +2,6 @@ package ds.item;
 
 import ds.DarkSwarm;
 import ds.entity.ModEntities;
-import ds.item.custom.OverlordWhipItem;
 import ds.item.custom.WhipItem;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.item.*;
@@ -17,11 +16,6 @@ public class ModItems {
     public static final Item WHIP = registerItem("whip",
             new WhipItem(ToolMaterials.IRON, new Item.Settings().attributeModifiers(WhipItem.createAttributeModifiers(ToolMaterials.IRON, 2, -2.0f))));
 
-
-    public static final Item OVERLOD_WHIP = registerItem("overlord_whip",
-            new OverlordWhipItem(ToolMaterials.IRON, new Item.Settings().attributeModifiers(WhipItem.createAttributeModifiers(ToolMaterials.IRON, 2, -2.0f))));
-
-
     private static Item registerItem(String name, Item item) {
         return Registry.register(Registries.ITEM, Identifier.of(DarkSwarm.MOD_ID, name), item);
     }
@@ -31,6 +25,4 @@ public class ModItems {
             entries.add(SOUL);
         });
     }
-
-
 }

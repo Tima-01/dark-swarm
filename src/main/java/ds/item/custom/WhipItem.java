@@ -1,5 +1,7 @@
 package ds.item.custom;
 
+import ds.enchantment.ModEnchantments;
+import ds.util.ItemUtil;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.gui.screen.Screen;
@@ -30,7 +32,6 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -82,15 +83,22 @@ public class WhipItem extends ToolItem {
         if (!(attacker instanceof PlayerEntity player)) return false;
         World world = player.getWorld();
         if (!world.isClient) {
-            double range = 7.0;   // дальность
-            double radius = 2.0;  // ширина
-            double angle = 0.6;
+            double baseRange = 3.0;
+            double baseRadius = 2;
+            double baseAngle = 0.3;
+
+            int rangeLevel = ItemUtil.getLevel(world, stack, ModEnchantments.LONGWHIP);
+            int wideLevel = ItemUtil.getLevel(world, stack, ModEnchantments.WIDE_SWING);
+
+            double range = baseRange + rangeLevel * 2.0;
+            double radius = baseRadius + wideLevel * 1.0;
+            double angle = baseAngle + wideLevel * 0.15;
+
             float aoeDamage = 2.5f;
             var look = player.getRotationVec(1.0F);
             var box = player.getBoundingBox()
                     .stretch(look.multiply(range))
                     .expand(radius);
-            int hitCount = 0;
             for (LivingEntity entity : world.getEntitiesByClass(
                     LivingEntity.class,
                     box,
@@ -106,20 +114,24 @@ public class WhipItem extends ToolItem {
                             player.getZ() - entity.getZ()
                     );
                     world.playSound(null, player.getBlockPos(), SoundEvents.ENTITY_PLAYER_ATTACK_SWEEP, SoundCategory.PLAYERS);
-                    hitCount++;
-                }
+                    }
             }
             stack.damage(1, attacker, EquipmentSlot.MAINHAND);
             if (target != null) {
-                ((ServerWorld) world).spawnParticles(
-                        ParticleTypes.SWEEP_ATTACK,
-                        target.getX(), target.getBodyY(0.5), target.getZ(),
-                        hitCount,
-                        0.5, 0.5, 0.5,
-                        0.0
-                );
-            }
-//            spawnSweepParticles(world, target, player);
+                for (LivingEntity entity : world.getEntitiesByClass(
+                        LivingEntity.class,
+                        box,
+                        e -> e != player && e != target
+                )) {
+                    ((ServerWorld) world).spawnParticles(
+                            ParticleTypes.SWEEP_ATTACK,
+                            entity.getX(), entity.getBodyY(0.5), entity.getZ(),
+                            1,
+                            0.5, 0.5, 0.5,
+                            0.0
+                    );
+                }
+                }
         }
         return true;
     }
@@ -159,13 +171,13 @@ public class WhipItem extends ToolItem {
                     }
                 }
                 player.sendMessage(
-                        net.minecraft.text.Text.literal("Цель отмечена"),
+                        net.minecraft.text.Text.translatable("whip_text.dark-swarm.target_acquired"),
                         true
                 );
                 player.swingHand(hand);
             } else {
                 player.sendMessage(
-                        net.minecraft.text.Text.literal("Нет цели"),
+                        net.minecraft.text.Text.translatable("whip_text.dark-swarm.target_not_found"),
                         true
                 );
             }
@@ -187,32 +199,5 @@ public class WhipItem extends ToolItem {
             tooltip.add(Text.translatable("tooltip.dark-swarm.whip.tooltip"));
         }
         super.appendTooltip(stack, context, tooltip, type);
-    }
-
-    private void spawnSweepParticles(World world, LivingEntity target, PlayerEntity player) {
-        if (!world.isClient && target != null && world instanceof ServerWorld serverWorld) {
-            int slices = 15; // количество шагов дуги
-            double maxRadius = 2.0; // максимальное смещение по горизонтали
-            double waveAmplitude = 0; // амплитуда волны по вертикали
-
-            var look = player.getRotationVec(1.0F);
-            var right = look.crossProduct(new Vec3d(0, 1, 0)).normalize(); // вправо от взгляда
-            var up = new Vec3d(0, 1, 0);
-
-            for (int i = 0; i <= slices; i++) {
-                double t = (double) i / slices; // 0..1
-                // смещение справа-налево с небольшой синусоидой
-                double offset = (Math.sin(t * Math.PI) * maxRadius) - (maxRadius/2);
-                double wave = Math.sin(t * Math.PI * 3) * waveAmplitude; // вертикальная волна
-
-                double x = target.getX() + right.x * offset + player.getRandom().nextDouble() * 0.1;
-                double y = target.getBodyY(0.5) + wave + player.getRandom().nextDouble() * 0.1;
-                double z = target.getZ() + right.z * offset + player.getRandom().nextDouble() * 0.1;
-
-                // создаём несколько видов частиц
-                serverWorld.spawnParticles(ParticleTypes.ENCHANTED_HIT, x, y, z, 1, 0, 0, 0, 0);
-                serverWorld.spawnParticles(ParticleTypes.CRIT, x, y, z, 1, 0, 0, 0, 0);
-            }
-        }
     }
 }

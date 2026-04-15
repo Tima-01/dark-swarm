@@ -1,11 +1,13 @@
 package ds;
 
 import ds.block.entity.ModBlockEntities;
+import ds.datagen.ModLootTableProvider;
 import ds.entity.ModEntities;
 import ds.item.ModItemGroups;
 import ds.item.ModItems;
 import ds.screen.ModScreenHandlers;
 import net.fabricmc.api.ModInitializer;
+
 import ds.util.ModLootTableModifiers;
 
 import org.slf4j.Logger;
