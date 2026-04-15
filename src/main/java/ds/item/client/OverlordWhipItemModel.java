@@ -18,7 +18,7 @@ public class OverlordWhipItemModel extends GeoModel<OverlordWhipItem> {
 
     @Override
     public Identifier getAnimationResource(OverlordWhipItem overlordWhipItem) {
-        return null;
+        return Identifier.of(DarkSwarm.MOD_ID, "animations/item/overlord_whip_animation.json");
     }
 
 
