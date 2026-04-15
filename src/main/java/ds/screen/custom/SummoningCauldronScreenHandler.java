@@ -1,6 +1,5 @@
 package ds.screen.custom;
 
-import ds.block.entity.custom.SummoningCauldronEntity;
 import ds.entity.ModEntities;
 import ds.item.ModItems;
 import ds.screen.ModScreenHandlers;
@@ -53,7 +52,7 @@ public class SummoningCauldronScreenHandler extends ScreenHandler {
                     entity.setTamed(true, true);
 
                     world.spawnEntity(entity);
-                }
+                                    }
             }
             return true;
         }

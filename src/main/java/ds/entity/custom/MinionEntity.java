@@ -1,6 +1,5 @@
 package ds.entity.custom;
 
-import ds.item.custom.WhipItem;
 import net.minecraft.entity.EntityData;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -14,6 +13,7 @@ import net.minecraft.entity.passive.TameableEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ProjectileUtil;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.SwordItem;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.hit.BlockHitResult;
@@ -23,6 +23,8 @@ import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.UUID;
 
 public class MinionEntity extends TameableEntity {
 
@@ -84,15 +86,22 @@ public class MinionEntity extends TameableEntity {
     }
 
 
+
+    public boolean isCommandMode() {
+        LivingEntity owner = this.getOwner();
+        return owner instanceof PlayerEntity && owner.getMainHandStack().getItem() instanceof SwordItem;
+    }
+
     public boolean isCommanding() {
         LivingEntity owner = this.getOwner();
-        return owner instanceof PlayerEntity p && p.getMainHandStack().getItem() instanceof WhipItem && p.isSneaking();
+        return owner instanceof PlayerEntity p && p.getMainHandStack().getItem() instanceof SwordItem && p.isSneaking();
     }
 
 
     public boolean isBusyFighting() {
         return this.getTarget() != null && this.getTarget().isAlive();
     }
+
 
 
     public static class MinionSwordCommandGoal extends Goal {

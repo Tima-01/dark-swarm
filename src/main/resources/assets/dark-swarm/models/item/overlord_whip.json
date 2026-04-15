@@ -1,0 +1,63 @@
+{
+  "credit": "Made with Blockbench",
+  "parent": "builtin/entity",
+  "display": {
+    "thirdperson_righthand": {
+      "translation": [
+        0,
+        -6.25,
+        1.75
+      ]
+    },
+    "thirdperson_lefthand": {
+      "translation": [
+        0,
+        -6.25,
+        1.75
+      ]
+    },
+    "firstperson_righthand": {
+      "translation": [
+        0,
+        -2.5,
+        0
+      ]
+    },
+    "firstperson_lefthand": {
+      "translation": [
+        0,
+        -2.5,
+        0
+      ]
+    },
+    "ground": {
+      "translation": [
+        0,
+        -4.5,
+        0
+      ]
+    },
+    "gui": {
+      "rotation": [
+        0,
+        -87.5,
+        0
+      ],
+      "translation": [
+        -1.75,
+        -6,
+        0
+      ]
+    },
+    "head": {
+      "translation": [
+        0,
+        0,
+        -4.5
+      ]
+    }
+  },
+  "textures": {
+    "particle": "dark-swarm:item/texture"
+  }
+}
