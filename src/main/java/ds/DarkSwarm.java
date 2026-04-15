@@ -6,7 +6,6 @@ import ds.item.ModItemGroups;
 import ds.item.ModItems;
 import ds.screen.ModScreenHandlers;
 import net.fabricmc.api.ModInitializer;
-
 import ds.util.ModLootTableModifiers;
 
 import org.slf4j.Logger;
