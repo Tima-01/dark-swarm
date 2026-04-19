@@ -3,6 +3,7 @@ package ds;
 import ds.entity.ModEntities;
 import ds.entity.client.MinionModel;
 import ds.entity.client.MinionRenderer;
+import ds.entity.client.SoulEaterRenderer;
 import ds.screen.ModScreenHandlers;
 import ds.screen.custom.SummoningCauldronScreen;
 import net.fabricmc.api.ClientModInitializer;
@@ -21,5 +22,7 @@ public class DarkSwarmClient implements ClientModInitializer {
 
 
         EntityRendererRegistry.register(ModEntities.MINION, MinionRenderer::new);
+
+        EntityRendererRegistry.register(ModEntities.SOUL_EATER, SoulEaterRenderer::new);
     }
 }
