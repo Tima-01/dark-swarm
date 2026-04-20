@@ -1,6 +1,7 @@
 package ds.block;
 
 import ds.DarkSwarm;
+import ds.block.custom.InlayTable;
 import ds.block.custom.SummoningCauldron;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.block.AbstractBlock;
@@ -16,6 +17,9 @@ public class ModBlocks{
 
     public static final Block SUMMONING_CAULDRON = registerBlock("summoning_cauldron",
             new SummoningCauldron(AbstractBlock.Settings.create().strength(1f).requiresTool()));
+
+    public static final Block INLAY_TABLE = registerBlock("inlay_table",
+            new InlayTable(AbstractBlock.Settings.create().strength(1f).requiresTool()));
 
     private static Block registerBlock(String name, Block block) {
         registerBlockItem(name, block);

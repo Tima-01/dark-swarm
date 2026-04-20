@@ -23,8 +23,8 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
                 .add(ModItems.SOUL_LEGGINGS)
                 .add(ModItems.SOUL_HELMET);
         getOrCreateTagBuilder(ItemTags.WEAPON_ENCHANTABLE)
-                .add(ModItems.WHIP);
+                .add(ModItems.OVERLORD_WHIP);
         getOrCreateTagBuilder(ModTags.Items.WHIP_ENCHANTABLE)
-                .add(ModItems.WHIP);
+                .add(ModItems.OVERLORD_WHIP);
     }
 }

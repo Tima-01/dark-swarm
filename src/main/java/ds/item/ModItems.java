@@ -5,7 +5,6 @@ import ds.item.custom.ModArmorItem;
 import ds.entity.ModEntities;
 import ds.item.custom.OverlordSwordItem;
 import ds.item.custom.OverlordWhipItem;
-import ds.item.custom.WhipItem;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.Item;
@@ -16,15 +15,13 @@ import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 
 public class ModItems {
+
+    //материалы
     public static final Item SOUL = registerItem("soul", new Item(new Item.Settings()));
     public static final Item PROFANED_SOUL = registerItem("profaned_soul", new Item(new Item.Settings()));
-    public static final Item MINION_SPAWN_EGG = registerItem("minion_spawn_egg",
-            new SpawnEggItem(ModEntities.MINION, 0xa16228, 0x198717, new Item.Settings()));
-    public static final Item SOUL_EATER_SPAWN_EGG = registerItem("soul_eater_spawn_egg",
-            new SpawnEggItem(ModEntities.SOUL_EATER, 0x541507, 0xbfb034, new Item.Settings()));
-    public static final Item WHIP = registerItem("whip",
-            new WhipItem(ModToolMaterials.IRON, new Item.Settings().attributeModifiers(WhipItem.createAttributeModifiers(ModToolMaterials.IRON, 1, -2.0f))));
+    public static final Item HANDLE = registerItem("handle", new Item(new Item.Settings()));
 
+    //инструменты
     public static final Item OVERLORD_SWORD = registerItem("overlord_sword",
             new OverlordSwordItem(ModToolMaterials.IRON, new Item.Settings().attributeModifiers(OverlordSwordItem.createAttributeModifiers(ModToolMaterials.IRON, 7, -1.0f))));
 
@@ -48,7 +45,11 @@ public class ModItems {
             new ArmorItem(ModArmorMaterials.SOUL_ARMOR_MATERIAL, ArmorItem.Type.LEGGINGS, new Item.Settings()
                     .maxDamage(ArmorItem.Type.LEGGINGS.getMaxDamage(15))));
 
-
+    //misc
+    public static final Item MINION_SPAWN_EGG = registerItem("minion_spawn_egg",
+            new SpawnEggItem(ModEntities.MINION, 0xa16228, 0x198717, new Item.Settings()));
+    public static final Item SOUL_EATER_SPAWN_EGG = registerItem("soul_eater_spawn_egg",
+            new SpawnEggItem(ModEntities.SOUL_EATER, 0x541507, 0xbfb034, new Item.Settings()));
 
     private static Item registerItem(String name, Item item) {
         return Registry.register(Registries.ITEM, Identifier.of(DarkSwarm.MOD_ID, name), item);

@@ -18,13 +18,14 @@ public class ModItemGroups {
                     .displayName(Text.translatable("itemgroup.dark-swarm.dark_swarm_items"))
                     .entries((displayContext, entries) -> {
                         entries.add(ModItems.SOUL);
+                        entries.add(ModItems.PROFANED_SOUL);
                         entries.add(ModBlocks.SUMMONING_CAULDRON);
                         entries.add(ModBlocks.INLAY_TABLE);
                         entries.add(ModItems.MINION_SPAWN_EGG);
                         entries.add(ModItems.SOUL_EATER_SPAWN_EGG);
-                        entries.add(ModItems.WHIP);
                         entries.add(ModItems.OVERLORD_SWORD);
                         entries.add(ModItems.OVERLORD_WHIP);
+                        entries.add(ModItems.HANDLE);
                     }).build());
 
     public static void registerItemGroups() {}

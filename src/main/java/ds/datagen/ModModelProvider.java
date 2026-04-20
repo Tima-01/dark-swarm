@@ -27,6 +27,7 @@ public class ModModelProvider extends FabricModelProvider {
     public void generateItemModels(ItemModelGenerator itemModelGenerator) {
         itemModelGenerator.register(ModItems.SOUL, Models.GENERATED);
         itemModelGenerator.register(ModItems.PROFANED_SOUL, Models.GENERATED);
+        itemModelGenerator.register(ModItems.HANDLE, Models.GENERATED);
         itemModelGenerator.register(ModItems.MINION_SPAWN_EGG, new Model(Optional.of(Identifier.of("item/template_spawn_egg")), Optional.empty()));
         itemModelGenerator.register(ModItems.SOUL_EATER_SPAWN_EGG, new Model(Optional.of(Identifier.of("item/template_spawn_egg")), Optional.empty()));
 

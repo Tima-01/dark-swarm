@@ -8,13 +8,16 @@
   "item.dark-swarm.soul_boots": "Summoner's boots",
   "item.dark-swarm.soul_leggings": "Summoner's leggings",
   "item.dark-swarm.minion_spawn_egg": "Cute lil creatures spawn egg",
-  "item.dark-swarm.whip": "Whip",
+  "item.dark-swarm.overlord_whip": "Whip",
   "item.dark-swarm.overlord_sword": "Overlord Sword",
+  "item.dark-swarm.handle": "Handle",
 
   "block.dark-swarm.summoning_cauldron": "Summoning cauldron",
+  "block.dark-swarm.inlay_table": "Inlay table",
 
   "gui.dark-swarm.summoning_cauldron.summon": "Summon",
   "gui.dark-swarm.summoning_cauldron": "Summoning cauldron",
+  "gui.dark-swarm.inlay_table": "Inlay table",
   "gui.dark-swarm.affected_minions": "Affected creatures",
 
   "entity.dark-swarm.minion": "Cute lil creature",

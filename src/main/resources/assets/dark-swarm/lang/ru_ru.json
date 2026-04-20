@@ -4,17 +4,20 @@
   "item.dark-swarm.soul": "Душа",
   "item.dark-swarm.profaned_soul": "Оскверненная душа",
   "item.dark-swarm.minion_spawn_egg": "Яйцо призыва Квакозябры обыкновенной",
-  "item.dark-swarm.whip": "Хлыст",
+  "item.dark-swarm.overlord_whip": "Хлыст",
   "item.dark-swarm.overlord_sword": "Меч повелителя",
   "item.dark-swarm.soul_helmet": "Шлем призывателя",
   "item.dark-swarm.soul_chestplate": "Нагрудник призывателя",
   "item.dark-swarm.soul_boots": "Поножи призывателя",
   "item.dark-swarm.soul_leggings": "Сапоги призывателя",
+  "item.dark-swarm.handle": "Рукоять",
 
   "block.dark-swarm.summoning_cauldron": "Чан призыва",
+  "block.dark-swarm.inlay_table": "Стол инкрустации",
 
   "gui.dark-swarm.summoning_cauldron.summon": "Призвать",
   "gui.dark-swarm.summoning_cauldron": "Чан призыва",
+  "gui.dark-swarm.inlay_table": "Стол инкрустации",
   "gui.dark-swarm.affected_minions": "Сущности под влиянием",
 
   "entity.dark-swarm.minion": "Квакозябра обыкновенная",
