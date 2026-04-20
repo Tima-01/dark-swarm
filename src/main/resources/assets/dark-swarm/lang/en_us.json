@@ -1,14 +1,31 @@
 {
   "itemgroup.dark-swarm.dark_swarm_items": "Dark Swarm",
+
   "item.dark-swarm.soul": "Soul",
-  "block.dark-swarm.summoning_cauldron": "Summoning cauldron",
-  "gui.dark-swarm.summoning_cauldron.summon": "Summon",
-  "gui.dark-swarm.summoning_cauldron": "Summoning cauldron",
-  "entity.dark-swarm.minion": "Cute lil creature",
+  "item.dark-swarm.profaned_soul": "Profaned soul",
+  "item.dark-swarm.soul_helmet": "Summoner's helmet",
+  "item.dark-swarm.soul_chestplate": "Summoner's chestplate",
+  "item.dark-swarm.soul_boots": "Summoner's boots",
+  "item.dark-swarm.soul_leggings": "Summoner's leggings",
   "item.dark-swarm.minion_spawn_egg": "Cute lil creatures spawn egg",
   "item.dark-swarm.whip": "Whip",
-  "item.dark-swarm.overlord_whip": "Overlord whip",
+  "item.dark-swarm.overlord_sword": "Overlord Sword",
+
+  "block.dark-swarm.summoning_cauldron": "Summoning cauldron",
+
+  "gui.dark-swarm.summoning_cauldron.summon": "Summon",
+  "gui.dark-swarm.summoning_cauldron": "Summoning cauldron",
+  "gui.dark-swarm.affected_minions": "Affected creatures",
+
+  "entity.dark-swarm.minion": "Cute lil creature",
+
   "tooltip.dark-swarm.whip.tooltip": "Deals damage in fan-shaped area. Right click to select target for minions.",
   "tooltip.dark-swarm.whip.tooltip.shiftdown": "Deals half of the main damage in fan-shaped area at a distance of 7 blocks.",
-  "tooltip.dark-swarm.whip.tooltip.shiftdown1": "Right click on an entity to select it as a target for your minions."
+  "tooltip.dark-swarm.whip.tooltip.shiftdown1": "Right click on an entity to select it as a target for your minions.",
+
+  "whip_text.dark-swarm.target_acquired": "Target acquired",
+  "whip_text.dark-swarm.target_not_found": "Target not found",
+
+  "enchantment.dark-swarm.longwhip": "Longwhip",
+  "enchantment.dark-swarm.wideswing": "Wide swing"
 }

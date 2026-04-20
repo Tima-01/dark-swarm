@@ -19,13 +19,13 @@ public class ModItemGroups {
                     .entries((displayContext, entries) -> {
                         entries.add(ModItems.SOUL);
                         entries.add(ModBlocks.SUMMONING_CAULDRON);
+                        entries.add(ModBlocks.INLAY_TABLE);
                         entries.add(ModItems.MINION_SPAWN_EGG);
+                        entries.add(ModItems.SOUL_EATER_SPAWN_EGG);
                         entries.add(ModItems.WHIP);
                         entries.add(ModItems.OVERLORD_SWORD);
                         entries.add(ModItems.OVERLORD_WHIP);
                     }).build());
 
-    public static void registerItemGroups() {
-        DarkSwarm.LOGGER.info("Registering Mod Item Groups");
-    }
+    public static void registerItemGroups() {}
 }

@@ -20,6 +20,8 @@ public class ModItems {
     public static final Item PROFANED_SOUL = registerItem("profaned_soul", new Item(new Item.Settings()));
     public static final Item MINION_SPAWN_EGG = registerItem("minion_spawn_egg",
             new SpawnEggItem(ModEntities.MINION, 0xa16228, 0x198717, new Item.Settings()));
+    public static final Item SOUL_EATER_SPAWN_EGG = registerItem("soul_eater_spawn_egg",
+            new SpawnEggItem(ModEntities.SOUL_EATER, 0x541507, 0xbfb034, new Item.Settings()));
     public static final Item WHIP = registerItem("whip",
             new WhipItem(ModToolMaterials.IRON, new Item.Settings().attributeModifiers(WhipItem.createAttributeModifiers(ModToolMaterials.IRON, 1, -2.0f))));
 
@@ -52,11 +54,13 @@ public class ModItems {
         return Registry.register(Registries.ITEM, Identifier.of(DarkSwarm.MOD_ID, name), item);
     }
 
+    // Есчо этот метод нужен для добавления предметов в ванильные категории, я сюда душу добавил потому что она как бы материал
     public static void registerModItems() {
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(entries -> {
             entries.add(SOUL);
-
-            //добавление предметов брони в игру
+        });
+        // Это боевая категория
+        ItemGroupEvents.modifyEntriesEvent(ItemGroups.COMBAT).register(entries -> {
             entries.add(SOUL_HELMET);
             entries.add(SOUL_CHESTPLATE);
             entries.add(SOUL_BOOTS);
