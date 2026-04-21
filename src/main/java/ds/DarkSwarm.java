@@ -5,6 +5,7 @@ import ds.datagen.ModLootTableProvider;
 import ds.entity.ModEntities;
 import ds.item.ModItemGroups;
 import ds.item.ModItems;
+import ds.recipe.ModRecipes;
 import ds.screen.ModScreenHandlers;
 import net.fabricmc.api.ModInitializer;
 
@@ -29,5 +30,6 @@ public class DarkSwarm implements ModInitializer {
 		ModScreenHandlers.registerScreenHandlers();
 
 		ModEntities.registerModEntities();
+        ModRecipes.registerRecipes();
 	}
 }

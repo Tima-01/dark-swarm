@@ -2,14 +2,14 @@ package ds.block.entity.custom;
 
 import ds.block.entity.ImplementedInventory;
 import ds.block.entity.ModBlockEntities;
-import ds.item.ModItems;
+import ds.recipe.InlayTableRecipeInput;
+import ds.recipe.ModRecipes;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.listener.ClientPlayPacketListener;
 import net.minecraft.network.packet.Packet;
@@ -21,10 +21,13 @@ import net.minecraft.text.Text;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import org.jetbrains.annotations.Nullable;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class InlayTableEntity extends BlockEntity
         implements ImplementedInventory, ExtendedScreenHandlerFactory<BlockPos> {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger("InlayTable");
     private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(4, ItemStack.EMPTY);
 
     public static final int SOUL_SLOT = 0;
@@ -41,22 +44,58 @@ public class InlayTableEntity extends BlockEntity
         return inventory;
     }
 
-    // ===================== LOGIC =====================
+//    public boolean canCraft() {
+//        return getStack(SOUL_SLOT).isOf(ModItems.SOUL)
+//                && getStack(PROPERTY_SLOT).isOf(Items.BLAZE_ROD)
+//                && getStack(MATERIAL_SLOT).isOf(Items.DIAMOND);
+//    }
 
-    public boolean canCraft() {
-        return getStack(SOUL_SLOT).isOf(ModItems.SOUL)
-                && getStack(PROPERTY_SLOT).isOf(Items.BLAZE_ROD)
-                && getStack(MATERIAL_SLOT).isOf(Items.DIAMOND);
-    }
-
-    public ItemStack getResultItem() {
-        return canCraft() ? new ItemStack(ModItems.PROFANED_SOUL) : ItemStack.EMPTY;
-    }
+//    public ItemStack getResultItem() {
+//        return canCraft() ? new ItemStack(ModItems.PROFANED_SOUL) : ItemStack.EMPTY;
+//    }
 
     public void updateResult() {
-        if (world == null || world.isClient) return;
+        if (world == null) {
+            LOGGER.info("World is NULL");
+            return;
+        }
 
-        inventory.set(RESULT_SLOT, getResultItem());
+        if (world.isClient) {
+            LOGGER.info("Client side - skipping");
+            return;
+        }
+
+        ItemStack soul = getStack(SOUL_SLOT);
+        ItemStack property = getStack(PROPERTY_SLOT);
+        ItemStack material = getStack(MATERIAL_SLOT);
+
+        LOGGER.info("=== UPDATE RESULT ===");
+        LOGGER.info("Soul: {}", soul);
+        LOGGER.info("Property: {}", property);
+        LOGGER.info("Material: {}", material);
+
+        InlayTableRecipeInput input = new InlayTableRecipeInput(
+                soul,
+                property,
+                material
+        );
+
+        var match = world.getRecipeManager()
+                .getFirstMatch(ModRecipes.INLAY_TABLE_TYPE, input, world);
+
+        if (match.isEmpty()) {
+            LOGGER.info("❌ NO RECIPE FOUND");
+            inventory.set(RESULT_SLOT, ItemStack.EMPTY);
+            return;
+        }
+
+        LOGGER.info("✅ RECIPE FOUND: {}", match.get().id());
+
+        ItemStack result = match.get().value().craft(input, world.getRegistryManager());
+
+        LOGGER.info("➡ RESULT: {}", result);
+
+        inventory.set(RESULT_SLOT, result);
     }
 
     public void consumeInputs() {
@@ -69,6 +108,8 @@ public class InlayTableEntity extends BlockEntity
 
     public void onInventoryChanged() {
         if (world == null || world.isClient) return;
+
+        LOGGER.info("Inventory changed!");
 
         updateResult();
         markDirty();

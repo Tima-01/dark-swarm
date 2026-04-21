@@ -11,9 +11,12 @@ import net.minecraft.item.Items;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.slot.Slot;
 import net.minecraft.util.math.BlockPos;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class InlayTableScreenHandler extends ScreenHandler {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger("InlayTableScreen");
     private final Inventory inventory;
     public final InlayTableEntity blockEntity;
 
@@ -47,6 +50,9 @@ public class InlayTableScreenHandler extends ScreenHandler {
         @Override
         public void onTakeItem(PlayerEntity player, ItemStack stack) {
             super.onTakeItem(player, stack);
+
+            LOGGER.info("Item taken");
+
             blockEntity.consumeInputs();
             blockEntity.onInventoryChanged();
         }

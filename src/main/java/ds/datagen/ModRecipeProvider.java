@@ -10,6 +10,8 @@ import net.minecraft.data.server.recipe.SmithingTransformRecipeJsonBuilder;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.recipe.book.RecipeCategory;
+import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
+import net.minecraft.recipe.book.RecipeCategory;
 import net.minecraft.registry.RegistryWrapper;
 
 import java.util.concurrent.CompletableFuture;
@@ -21,7 +23,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
 
     @Override
     public void generate(RecipeExporter exporter) {
-        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.OVERLORD_WHIP)
+        ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, ModItems.OVERLORD_WHIP)
                 .pattern(" KI")
                 .pattern("I  ")
                 .pattern(" KH")
