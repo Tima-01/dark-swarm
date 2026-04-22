@@ -12,7 +12,7 @@ import net.minecraft.client.gui.widget.ButtonWidget;
 
 public class SummoningCauldronScreen extends HandledScreen<SummoningCauldronScreenHandler> {
     public static final Identifier GUI_TEXTURE =
-            Identifier.of(DarkSwarm.MOD_ID, "textures/gui/summoning_cauldron/inlay_table.png");
+            Identifier.of(DarkSwarm.MOD_ID, "textures/gui/summoning_cauldron/summoning_cauldron.png");
 
     public SummoningCauldronScreen(SummoningCauldronScreenHandler handler, PlayerInventory inventory, Text title) {
         super(handler, inventory, title);
@@ -40,6 +40,8 @@ public class SummoningCauldronScreen extends HandledScreen<SummoningCauldronScre
         this.addDrawableChild(ButtonWidget.builder(
                 Text.translatable("gui.dark-swarm.summoning_cauldron.summon"),
                 button -> {
+                    assert client != null;
+                    assert client.interactionManager != null;
                     client.interactionManager.clickButton(handler.syncId, 0);
                 }
         ).dimensions(x + 105, y + 34, 60, 20).build());

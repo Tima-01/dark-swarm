@@ -12,6 +12,9 @@
   "item.dark-swarm.overlord_whip": "Whip",
   "item.dark-swarm.overlord_sword": "Overlord Sword",
   "item.dark-swarm.handle": "Handle",
+  "item.dark-swarm.fire_stone": "Fire stone",
+
+  "effect.dark-swarm.blazing_aura": "Blazing aura",
 
   "block.dark-swarm.summoning_cauldron": "Summoning cauldron",
   "block.dark-swarm.inlay_table": "Inlay table",
@@ -22,6 +25,7 @@
   "gui.dark-swarm.affected_minions": "Affected creatures",
 
   "entity.dark-swarm.minion": "Cute lil creature",
+  "entity.dark-swarm.soul_eater": "Soul eater",
 
   "tooltip.dark-swarm.whip.tooltip": "Deals damage in fan-shaped area. Right click to select target for minions.",
   "tooltip.dark-swarm.whip.tooltip.shiftdown": "Deals half of the main damage in fan-shaped area at a distance of 7 blocks.",

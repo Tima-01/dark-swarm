@@ -1,8 +1,8 @@
 package ds.item;
 
 import ds.DarkSwarm;
-import ds.item.custom.ModArmorItem;
 import ds.entity.ModEntities;
+import ds.item.custom.ModArmorItem;
 import ds.item.custom.OverlordSwordItem;
 import ds.item.custom.OverlordWhipItem;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
@@ -20,6 +20,7 @@ public class ModItems {
     public static final Item SOUL = registerItem("soul", new Item(new Item.Settings()));
     public static final Item PROFANED_SOUL = registerItem("profaned_soul", new Item(new Item.Settings()));
     public static final Item HANDLE = registerItem("handle", new Item(new Item.Settings()));
+    public static final Item FIRE_STONE = registerItem("fire_stone", new Item(new Item.Settings()));
 
     //инструменты
     public static final Item OVERLORD_SWORD = registerItem("overlord_sword",
@@ -59,6 +60,8 @@ public class ModItems {
     public static void registerModItems() {
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(entries -> {
             entries.add(SOUL);
+            entries.add(PROFANED_SOUL);
+            entries.add(FIRE_STONE);
         });
         // Это боевая категория
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.COMBAT).register(entries -> {

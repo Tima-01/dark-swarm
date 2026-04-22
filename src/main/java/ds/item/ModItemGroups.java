@@ -10,7 +10,6 @@ import net.minecraft.registry.Registry;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
-
 public class ModItemGroups {
     public static final ItemGroup DARK_SWARM = Registry.register(Registries.ITEM_GROUP,
             Identifier.of(DarkSwarm.MOD_ID, "dark_swarm_items"),
@@ -19,6 +18,7 @@ public class ModItemGroups {
                     .entries((displayContext, entries) -> {
                         entries.add(ModItems.SOUL);
                         entries.add(ModItems.PROFANED_SOUL);
+                        entries.add(ModItems.FIRE_STONE);
                         entries.add(ModBlocks.SUMMONING_CAULDRON);
                         entries.add(ModBlocks.INLAY_TABLE);
                         entries.add(ModItems.MINION_SPAWN_EGG);
@@ -26,6 +26,11 @@ public class ModItemGroups {
                         entries.add(ModItems.OVERLORD_SWORD);
                         entries.add(ModItems.OVERLORD_WHIP);
                         entries.add(ModItems.HANDLE);
+
+                        entries.add(ModItems.SOUL_HELMET);
+                        entries.add(ModItems.SOUL_CHESTPLATE);
+                        entries.add(ModItems.SOUL_BOOTS);
+                        entries.add(ModItems.SOUL_LEGGINGS);
                     }).build());
 
     public static void registerItemGroups() {}

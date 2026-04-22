@@ -1,4 +1,3 @@
-
 package ds.util;
 
 import ds.entity.custom.MinionEntity;
@@ -19,7 +18,7 @@ import java.util.List;
 /**
  * Manages armor-based buff effects for tamed entities.
  *
- * The buff area extends
+ * <p>The buff area extends
  * 8 blocks from the player and refreshes every server tick. Also tracks the count of currently
  * buffed entities for UI display purposes.
  *
