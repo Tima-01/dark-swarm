@@ -1,11 +1,11 @@
 package ds.item.custom;
 
 import com.google.common.collect.ImmutableMap;
+import ds.effects.ModEffects;
 import ds.item.ModArmorMaterials;
 import ds.util.ArmorUtil;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterial;
@@ -25,8 +25,7 @@ public class ModArmorItem extends ArmorItem {
     public static final Map<RegistryEntry<ArmorMaterial>, List<StatusEffectInstance>> MATERIAL_TO_EFFECT_MAP =
             (new ImmutableMap.Builder<RegistryEntry<ArmorMaterial>, List<StatusEffectInstance>>())
                     .put(ModArmorMaterials.SOUL_ARMOR_MATERIAL,
-                            List.of(new StatusEffectInstance(StatusEffects.HASTE, 400, 2, false, false),
-                                    new StatusEffectInstance(StatusEffects.GLOWING,500,2,false,false))).build();
+                            List.of(new StatusEffectInstance(ModEffects.BLAZING_AURA, 40, 0, false, false))).build();
     /**Check for armor every Tick*/
     @Override
     public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected) {

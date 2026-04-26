@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": {
+    "item": "dark-swarm:soul"
+  },
+  "base": {
+    "item": "minecraft:stick"
+  },
+  "result": {
+    "count": 1,
+    "id": "dark-swarm:handle"
+  },
+  "template": []
+}

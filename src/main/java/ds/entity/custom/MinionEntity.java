@@ -1,5 +1,7 @@
 package ds.entity.custom;
 
+import ds.item.custom.OverlordSwordItem;
+import ds.item.custom.OverlordWhipItem;
 import net.minecraft.entity.EntityData;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -86,22 +88,18 @@ public class MinionEntity extends TameableEntity {
     }
 
 
-
-    public boolean isCommandMode() {
-        LivingEntity owner = this.getOwner();
-        return owner instanceof PlayerEntity && owner.getMainHandStack().getItem() instanceof SwordItem;
-    }
-
     public boolean isCommanding() {
         LivingEntity owner = this.getOwner();
-        return owner instanceof PlayerEntity p && p.getMainHandStack().getItem() instanceof SwordItem && p.isSneaking();
+        return owner instanceof PlayerEntity p && (
+                p.getMainHandStack().getItem() instanceof OverlordWhipItem ||
+                        p.getMainHandStack().getItem() instanceof OverlordSwordItem)
+                && p.isSneaking();
     }
 
 
     public boolean isBusyFighting() {
         return this.getTarget() != null && this.getTarget().isAlive();
     }
-
 
 
     public static class MinionSwordCommandGoal extends Goal {

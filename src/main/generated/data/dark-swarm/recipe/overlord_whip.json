@@ -1,24 +1,24 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "misc",
+  "category": "equipment",
   "key": {
+    "H": {
+      "item": "dark-swarm:handle"
+    },
     "I": {
       "item": "minecraft:iron_ingot"
     },
     "K": {
       "item": "minecraft:leather"
-    },
-    "S": {
-      "item": "minecraft:stick"
     }
   },
   "pattern": [
     " KI",
     "I  ",
-    " KS"
+    " KH"
   ],
   "result": {
     "count": 1,
-    "id": "dark-swarm:whip"
+    "id": "dark-swarm:overlord_whip"
   }
 }

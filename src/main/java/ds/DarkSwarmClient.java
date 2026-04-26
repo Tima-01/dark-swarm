@@ -5,6 +5,7 @@ import ds.entity.client.MinionModel;
 import ds.entity.client.MinionRenderer;
 import ds.entity.client.SoulEaterRenderer;
 import ds.screen.ModScreenHandlers;
+import ds.screen.custom.InlayTableScreen;
 import ds.screen.custom.SummoningCauldronScreen;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
@@ -16,6 +17,7 @@ public class DarkSwarmClient implements ClientModInitializer {
     public void onInitializeClient() {
 
         HandledScreens.register(ModScreenHandlers.SUMMONING_CAULDRON_SCREEN_HANDLER, SummoningCauldronScreen::new);
+        HandledScreens.register(ModScreenHandlers.INLAY_TABLE_SCREEN_HANDLER, InlayTableScreen::new);
 
 
         EntityModelLayerRegistry.registerModelLayer(MinionModel.LAYER_LOCATION, MinionModel::getTexturedModelData);

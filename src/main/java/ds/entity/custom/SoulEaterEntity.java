@@ -52,25 +52,15 @@ public class SoulEaterEntity extends PathAwareEntity implements GeoEntity {
     public ActionResult interactMob(PlayerEntity player, Hand hand) {
         ItemStack stack = player.getStackInHand(hand);
 
-        if (stack.isOf(Items.SOUL_SAND)) {
-
-            if (!this.getWorld().isClient) {
-
-
+        if (!this.getWorld().isClient) {
+            if (stack.isOf(Items.SOUL_SAND)) {
+                if(player.getItemCooldownManager().isCoolingDown(Items.SOUL_SAND)) return ActionResult.PASS;
                 if (this.random.nextFloat() < 0.3f) {
                     this.dropItem(ModItems.SOUL);
                 }
-
-
                 stack.decrement(1);
-
-
                 player.getItemCooldownManager().set(Items.SOUL_SAND, 60);
-
-
                 this.playSound(SoundEvents.ENTITY_ENDERMAN_AMBIENT, 1.0F, 1.0F);
-
-
                 ((ServerWorld)this.getWorld()).spawnParticles(
                         ParticleTypes.SOUL,
                         this.getX(), this.getY() + 1, this.getZ(),
@@ -79,10 +69,24 @@ public class SoulEaterEntity extends PathAwareEntity implements GeoEntity {
                         0.01
                 );
             }
-
+            else if (stack.isOf(ModItems.PROFANED_SOUL)) {
+                if(player.getItemCooldownManager().isCoolingDown(ModItems.PROFANED_SOUL)) return ActionResult.PASS;
+                if (this.random.nextFloat() < 0.5f) {
+                    this.dropItem(ModItems.SOUL);
+                }
+                stack.decrement(1);
+                player.getItemCooldownManager().set(ModItems.PROFANED_SOUL, 40);
+                this.playSound(SoundEvents.ENTITY_ENDERMAN_AMBIENT, 1.0F, 1.0F);
+                ((ServerWorld)this.getWorld()).spawnParticles(
+                        ParticleTypes.SOUL,
+                        this.getX(), this.getY() + 1, this.getZ(),
+                        10,
+                        0.3, 0.3, 0.3,
+                        0.01
+                );
+            }
             return ActionResult.SUCCESS;
         }
-
         return super.interactMob(player, hand);
     }
 

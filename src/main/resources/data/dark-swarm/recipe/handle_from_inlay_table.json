@@ -1,0 +1,16 @@
+{
+  "type": "dark-swarm:inlay_table",
+  "soul": {
+    "item": "dark-swarm:soul"
+  },
+  "property": {
+    "item": "minecraft:blaze_rod"
+  },
+  "material": {
+    "item": "minecraft:breeze_rod"
+  },
+  "result": {
+    "id": "dark-swarm:handle",
+    "count": 1
+  }
+}
