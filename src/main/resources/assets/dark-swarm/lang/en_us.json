@@ -13,11 +13,15 @@
   "item.dark-swarm.overlord_sword": "Overlord Sword",
   "item.dark-swarm.handle": "Handle",
   "item.dark-swarm.fire_stone": "Fire stone",
+  "item.dark-swarm.ice_stone": "Ice stone",
+  "item.dark-swarm.fire_essence": "Fire essence",
+  "item.dark-swarm.ice_essence": "Ice essence",
 
   "effect.dark-swarm.blazing_aura": "Blazing aura",
 
   "block.dark-swarm.summoning_cauldron": "Summoning cauldron",
   "block.dark-swarm.inlay_table": "Inlay table",
+  "block.dark-swarm.nether_spike": "Nether spike",
 
   "gui.dark-swarm.summoning_cauldron.summon": "Summon",
   "gui.dark-swarm.summoning_cauldron": "Summoning cauldron",

@@ -1,5 +1,6 @@
 package ds.effects.custom;
 
+import ds.mixin.BlazingAuraFireAttackMixin;
 import ds.mixin.BlazingAuraFireImmunityMixin;
 import ds.util.OwnerUtil;
 import net.minecraft.entity.LivingEntity;
@@ -18,6 +19,7 @@ import net.minecraft.entity.effect.StatusEffectCategory;
  * Fire damage immunity for controlled mobs
  *
  * @see BlazingAuraFireImmunityMixin for fire immunity behavior
+ * @see BlazingAuraFireAttackMixin for fire attack behavior
  * @see OwnerUtil for effect propagation to owned entities
  */
 public class BlazingAura extends StatusEffect {

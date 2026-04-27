@@ -7,6 +7,7 @@ import net.minecraft.advancement.criterion.InventoryChangedCriterion;
 import net.minecraft.data.server.recipe.RecipeExporter;
 import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
 import net.minecraft.data.server.recipe.SmithingTransformRecipeJsonBuilder;
+import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.recipe.book.RecipeCategory;
@@ -14,6 +15,7 @@ import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
 import net.minecraft.recipe.book.RecipeCategory;
 import net.minecraft.registry.RegistryWrapper;
 
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 public class ModRecipeProvider extends FabricRecipeProvider {
@@ -23,6 +25,10 @@ public class ModRecipeProvider extends FabricRecipeProvider {
 
     @Override
     public void generate(RecipeExporter exporter) {
+        List<ItemConvertible> BLAZE_ROD_SMELTABLE = List.of(Items.BLAZE_ROD);
+
+        offerBlasting(exporter, BLAZE_ROD_SMELTABLE, RecipeCategory.MISC, ModItems.FIRE_ESSENCE, 0, 500, "blaze_rod");
+
         ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, ModItems.OVERLORD_WHIP)
                 .pattern(" KI")
                 .pattern("I  ")
@@ -31,6 +37,15 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .input('K', Items.LEATHER)
                 .input('H', ModItems.HANDLE)
                 .criterion(hasItem(Items.IRON_INGOT), conditionsFromItem(Items.IRON_INGOT))
+                .offerTo(exporter);
+
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.ICE_ESSENCE)
+                .pattern("III")
+                .pattern("IEI")
+                .pattern("III")
+                .input('I', Items.BLUE_ICE)
+                .input('E', Items.PRISMARINE_SHARD)
+                .criterion(hasItem(Items.PRISMARINE_SHARD), conditionsFromItem(Items.PRISMARINE_SHARD))
                 .offerTo(exporter);
         /** Recipe generation for crafting custom modded armor, uses ShapedRecipeJsonBuilder to then  define the shape/pattern of the craftable item
          for example the helmet is:

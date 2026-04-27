@@ -21,6 +21,9 @@ public class ModItems {
     public static final Item PROFANED_SOUL = registerItem("profaned_soul", new Item(new Item.Settings()));
     public static final Item HANDLE = registerItem("handle", new Item(new Item.Settings()));
     public static final Item FIRE_STONE = registerItem("fire_stone", new Item(new Item.Settings()));
+    public static final Item ICE_STONE = registerItem("ice_stone", new Item(new Item.Settings()));
+    public static final Item FIRE_ESSENCE = registerItem("fire_essence", new Item(new Item.Settings()));
+    public static final Item ICE_ESSENCE = registerItem("ice_essence", new Item(new Item.Settings()));
 
     //инструменты
     public static final Item OVERLORD_SWORD = registerItem("overlord_sword",
@@ -62,6 +65,7 @@ public class ModItems {
             entries.add(SOUL);
             entries.add(PROFANED_SOUL);
             entries.add(FIRE_STONE);
+            entries.add(ICE_STONE);
         });
         // Это боевая категория
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.COMBAT).register(entries -> {

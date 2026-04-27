@@ -13,11 +13,15 @@
   "item.dark-swarm.soul_leggings": "Сапоги призывателя",
   "item.dark-swarm.handle": "Рукоять",
   "item.dark-swarm.fire_stone": "Огненный камень",
+  "item.dark-swarm.ice_stone": "Ледяной камень",
+  "item.dark-swarm.fire_essence": "Эссенция огня",
+  "item.dark-swarm.ice_essence": "Эссенция льда",
 
   "effect.dark-swarm.blazing_aura": "Пылающая аура",
 
   "block.dark-swarm.summoning_cauldron": "Чан призыва",
   "block.dark-swarm.inlay_table": "Стол инкрустации",
+  "block.dark-swarm.nether_spike": "Адский шип",
 
   "gui.dark-swarm.summoning_cauldron.summon": "Призвать",
   "gui.dark-swarm.summoning_cauldron": "Чан призыва",

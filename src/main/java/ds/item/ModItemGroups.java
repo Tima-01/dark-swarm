@@ -19,8 +19,13 @@ public class ModItemGroups {
                         entries.add(ModItems.SOUL);
                         entries.add(ModItems.PROFANED_SOUL);
                         entries.add(ModItems.FIRE_STONE);
+                        entries.add(ModItems.ICE_STONE);
+                        entries.add(ModItems.ICE_ESSENCE);
+                        entries.add(ModItems.FIRE_ESSENCE);
                         entries.add(ModBlocks.SUMMONING_CAULDRON);
                         entries.add(ModBlocks.INLAY_TABLE);
+                        entries.add(ModBlocks.NETHER_SPIKE);
+                        entries.add(ModBlocks.ICE_SPIKE);
                         entries.add(ModItems.MINION_SPAWN_EGG);
                         entries.add(ModItems.SOUL_EATER_SPAWN_EGG);
                         entries.add(ModItems.OVERLORD_SWORD);
