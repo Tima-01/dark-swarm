@@ -45,6 +45,10 @@ public class ModArmorItem extends ArmorItem {
             List<StatusEffectInstance> mapStatusEffects = entry.getValue();
 
             if (ArmorUtil.hasCorrectArmorOn(mapArmorMaterial, player)) {
+                if (mapArmorMaterial == ModArmorMaterials.SOUL_ARMOR_MATERIAL
+                        && !ArmorUtil.isFireEnhanced(player)) {
+                    continue;
+                }
                 addStatusEffectForMaterial(player, mapArmorMaterial, mapStatusEffects);
             }
         }

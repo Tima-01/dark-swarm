@@ -7,6 +7,9 @@
     "BlazingAuraFireImmunityMixin",
     "ExampleMixin"
   ],
+  "client": [
+    "EnhancedChestplateOverlayMixin"
+  ],
   "injectors": {
     "defaultRequire": 1
   },

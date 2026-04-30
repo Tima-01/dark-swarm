@@ -1,10 +1,15 @@
 
 package ds.util;
 
+import ds.DarkSwarm;
+import ds.item.ModItems;
+import net.minecraft.component.DataComponentTypes;
+import net.minecraft.component.type.NbtComponent;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.registry.entry.RegistryEntry;
 
 public class ArmorUtil {
@@ -46,5 +51,22 @@ public class ArmorUtil {
         ItemStack helmet = player.getInventory().getArmorStack(3);
 
         return !helmet.isEmpty() && !leggings.isEmpty() && !boots.isEmpty() && !chestplate.isEmpty();
+    }
+
+    public static boolean isFireEnhanced(PlayerEntity player) {
+        ItemStack chestplate = player.getInventory().getArmorStack(2);
+        if (chestplate.isEmpty() || !chestplate.isOf(ModItems.SOUL_CHESTPLATE)) return false;
+        return isFireEnhanced(chestplate);
+    }
+
+    public static boolean isFireEnhanced(ItemStack stack) {
+        NbtComponent customData = stack.get(DataComponentTypes.CUSTOM_DATA);
+        if (customData == null) return false;
+
+        NbtCompound root = customData.copyNbt();
+        if (!root.contains(DarkSwarm.MOD_ID, NbtCompound.COMPOUND_TYPE)) return false;
+
+        NbtCompound modData = root.getCompound(DarkSwarm.MOD_ID);
+        return modData.getBoolean("fire_enhanced");
     }
 }

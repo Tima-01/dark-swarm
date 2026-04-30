@@ -18,7 +18,7 @@ import java.util.function.Supplier;
 
 public class ModArmorMaterials {
 
-    public static final RegistryEntry<ArmorMaterial> SOUL_ARMOR_MATERIAL = registerArmorMaterial("ds_armor_material",
+    public static final RegistryEntry<ArmorMaterial> SOUL_ARMOR_MATERIAL = registerArmorMaterial("soul_armor",
             () -> new ArmorMaterial(Util.make(new EnumMap<>(ArmorItem.Type.class), map -> {
                 map.put(ArmorItem.Type.BOOTS,2);
                 map.put(ArmorItem.Type.LEGGINGS,2);
@@ -26,9 +26,9 @@ public class ModArmorMaterials {
                 map.put(ArmorItem.Type.HELMET,2);
                 map.put(ArmorItem.Type.BODY,2);
             }), 20, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND,() -> Ingredient.ofItems(ModItems.SOUL),
-                    List.of(new ArmorMaterial.Layer(Identifier.of(DarkSwarm.MOD_ID,"ds"))),0,0));
+                    List.of(new ArmorMaterial.Layer(Identifier.of(DarkSwarm.MOD_ID,"soul_armor"))),0,0));
 
     public static RegistryEntry<ArmorMaterial> registerArmorMaterial(String name, Supplier<ArmorMaterial> material){
-        return Registry.registerReference(Registries.ARMOR_MATERIAL, Identifier.of("ds", name), material.get());
+        return Registry.registerReference(Registries.ARMOR_MATERIAL, Identifier.of(DarkSwarm.MOD_ID, name), material.get());
     }
 }

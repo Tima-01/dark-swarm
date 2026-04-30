@@ -8,14 +8,18 @@ import ds.entity.ModEntities;
 import ds.entity.client.MinionModel;
 import ds.entity.client.MinionRenderer;
 import ds.entity.client.SoulEaterRenderer;
+import ds.item.ModItems;
+import ds.util.ArmorUtil;
 import ds.screen.ModScreenHandlers;
 import ds.screen.custom.InlayTableScreen;
 import ds.screen.custom.SummoningCauldronScreen;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
+import net.minecraft.client.item.ModelPredicateProviderRegistry;
 import net.minecraft.client.gui.screen.ingame.HandledScreens;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
+import net.minecraft.util.Identifier;
 
 public class DarkSwarmClient implements ClientModInitializer {
     @Override
@@ -33,5 +37,11 @@ public class DarkSwarmClient implements ClientModInitializer {
         BlockEntityRendererFactories.register(ModBlockEntities.NETHER_SPIKE_ENTITY_BE, NetherSpikeEntityRenderer::new);
 
         BlockEntityRendererFactories.register(ModBlockEntities.ICE_SPIKE_ENTITY_BE, IceSpikeEntityRenderer::new);
+
+        ModelPredicateProviderRegistry.register(
+                ModItems.SOUL_CHESTPLATE,
+                Identifier.of(DarkSwarm.MOD_ID, "fire_enhanced"),
+                (stack, world, entity, seed) -> ArmorUtil.isFireEnhanced(stack) ? 1.0f : 0.0f
+        );
     }
 }

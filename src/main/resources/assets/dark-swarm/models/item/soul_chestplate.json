@@ -1,0 +1,15 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "dark-swarm:item/soul_chestplate"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "dark-swarm:fire_enhanced": 1
+      },
+      "model": "dark-swarm:item/soul_chestplate_fire"
+    }
+  ]
+}
+
