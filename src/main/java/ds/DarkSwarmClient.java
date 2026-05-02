@@ -1,7 +1,6 @@
 package ds;
 
 import ds.block.entity.ModBlockEntities;
-import ds.block.entity.custom.IceSpikeEntity;
 import ds.block.entity.renderer.IceSpikeEntityRenderer;
 import ds.block.entity.renderer.NetherSpikeEntityRenderer;
 import ds.entity.ModEntities;
@@ -9,15 +8,17 @@ import ds.entity.client.MinionModel;
 import ds.entity.client.MinionRenderer;
 import ds.entity.client.SoulEaterRenderer;
 import ds.item.ModItems;
-import ds.util.ArmorUtil;
+import ds.item.custom.FireChestplateArmorRenderer;
 import ds.screen.ModScreenHandlers;
 import ds.screen.custom.InlayTableScreen;
 import ds.screen.custom.SummoningCauldronScreen;
+import ds.util.ArmorUtil;
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.fabric.api.client.rendering.v1.ArmorRenderer;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
-import net.minecraft.client.item.ModelPredicateProviderRegistry;
 import net.minecraft.client.gui.screen.ingame.HandledScreens;
+import net.minecraft.client.item.ModelPredicateProviderRegistry;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
 import net.minecraft.util.Identifier;
 
@@ -43,5 +44,8 @@ public class DarkSwarmClient implements ClientModInitializer {
                 Identifier.of(DarkSwarm.MOD_ID, "fire_enhanced"),
                 (stack, world, entity, seed) -> ArmorUtil.isFireEnhanced(stack) ? 1.0f : 0.0f
         );
+
+        ArmorRenderer.register(new FireChestplateArmorRenderer(), ModItems.SOUL_CHESTPLATE);
+
     }
 }

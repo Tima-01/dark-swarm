@@ -1,0 +1,16 @@
+{
+  "type": "dark-swarm:inlay_table",
+  "soul": {
+    "item": "dark-swarm:soul"
+  },
+  "property": {
+    "item": "minecraft:blaze_rod"
+  },
+  "material": {
+    "item": "minecraft:diamond"
+  },
+  "result": {
+    "id": "dark-swarm:fire_stone",
+    "count": 1
+  }
+}

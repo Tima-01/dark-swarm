@@ -8,12 +8,13 @@
     "ExampleMixin"
   ],
   "client": [
-    "EnhancedChestplateOverlayMixin"
+    "ItemRendererMixin",
+    "ModelLoaderMixin"
   ],
   "injectors": {
     "defaultRequire": 1
   },
   "overwrites": {
     "requireAnnotations": true
-	}
+  }
 }

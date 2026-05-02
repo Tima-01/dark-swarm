@@ -2,7 +2,7 @@
   "parent": "minecraft:item/generated",
   "textures": {
     "layer0": "dark-swarm:item/soul_chestplate",
-    "layer1": "minecraft:item/redstone"
+    "layer1": "dark-swarm:item/fire_enhancement"
   }
 }
 
