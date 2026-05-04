@@ -9,6 +9,12 @@
         "dark-swarm:fire_enhanced": 1
       },
       "model": "dark-swarm:item/soul_chestplate_fire"
+    },
+    {
+      "predicate": {
+        "dark-swarm:ice_enhanced": 1
+      },
+      "model": "dark-swarm:item/soul_chestplate_ice"
     }
   ]
 }

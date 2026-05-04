@@ -5,7 +5,9 @@
   "mixins": [
     "BlazingAuraFireAttackMixin",
     "BlazingAuraFireImmunityMixin",
-    "ExampleMixin"
+    "ExampleMixin",
+    "FreezingPresenceFreezeAttackMixin",
+    "FreezingPresenceFrostbiteImmunityMixin"
   ],
   "client": [
     "ItemRendererMixin",

@@ -25,7 +25,10 @@ public class ModArmorItem extends ArmorItem {
     public static final Map<RegistryEntry<ArmorMaterial>, List<StatusEffectInstance>> MATERIAL_TO_EFFECT_MAP =
             (new ImmutableMap.Builder<RegistryEntry<ArmorMaterial>, List<StatusEffectInstance>>())
                     .put(ModArmorMaterials.SOUL_ARMOR_MATERIAL,
-                            List.of(new StatusEffectInstance(ModEffects.BLAZING_AURA, 40, 0, false, false))).build();
+                            List.of(
+                                    new StatusEffectInstance(ModEffects.BLAZING_AURA, 40, 0, false, false),
+                                    new StatusEffectInstance(ModEffects.FREEZING_PRESENCE, 40, 0, false, false)
+                            )).build();
     /**Check for armor every Tick*/
     @Override
     public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
@@ -45,10 +48,6 @@ public class ModArmorItem extends ArmorItem {
             List<StatusEffectInstance> mapStatusEffects = entry.getValue();
 
             if (ArmorUtil.hasCorrectArmorOn(mapArmorMaterial, player)) {
-                if (mapArmorMaterial == ModArmorMaterials.SOUL_ARMOR_MATERIAL
-                        && !ArmorUtil.isFireEnhanced(player)) {
-                    continue;
-                }
                 addStatusEffectForMaterial(player, mapArmorMaterial, mapStatusEffects);
             }
         }
@@ -56,14 +55,23 @@ public class ModArmorItem extends ArmorItem {
 
     private void addStatusEffectForMaterial(PlayerEntity player, RegistryEntry<ArmorMaterial> mapArmorMaterial,
                                             List<StatusEffectInstance> mapStatusEffect) {
-        boolean hasPlayerEffect = mapStatusEffect.stream()
-                .allMatch(statusEffectInstance -> player.hasStatusEffect(statusEffectInstance.getEffectType()));
+        if (!ArmorUtil.hasCorrectArmorOn(mapArmorMaterial, player)) return;
 
-        if (ArmorUtil.hasCorrectArmorOn(mapArmorMaterial, player) && !hasPlayerEffect) {
-            for (StatusEffectInstance instance : mapStatusEffect) {
-                player.addStatusEffect(new StatusEffectInstance(instance.getEffectType(),
-                        instance.getDuration(), instance.getAmplifier(), instance.isAmbient(), instance.shouldShowParticles()));
-            }
+        boolean fireEnhanced = mapArmorMaterial == ModArmorMaterials.SOUL_ARMOR_MATERIAL && ArmorUtil.isFireEnhanced(player);
+        boolean iceEnhanced = mapArmorMaterial == ModArmorMaterials.SOUL_ARMOR_MATERIAL && ArmorUtil.isIceEnhanced(player);
+
+        for (StatusEffectInstance instance : mapStatusEffect) {
+            if (instance.getEffectType() == ModEffects.BLAZING_AURA && !fireEnhanced) continue;
+            if (instance.getEffectType() == ModEffects.FREEZING_PRESENCE && !iceEnhanced) continue;
+            if (player.hasStatusEffect(instance.getEffectType())) continue;
+
+            player.addStatusEffect(new StatusEffectInstance(
+                    instance.getEffectType(),
+                    instance.getDuration(),
+                    instance.getAmplifier(),
+                    instance.isAmbient(),
+                    instance.shouldShowParticles()
+            ));
         }
     }
 

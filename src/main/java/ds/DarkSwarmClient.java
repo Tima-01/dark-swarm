@@ -8,7 +8,7 @@ import ds.entity.client.MinionModel;
 import ds.entity.client.MinionRenderer;
 import ds.entity.client.SoulEaterRenderer;
 import ds.item.ModItems;
-import ds.item.custom.FireChestplateArmorRenderer;
+import ds.item.custom.SoulChestplateArmorRenderer;
 import ds.screen.ModScreenHandlers;
 import ds.screen.custom.InlayTableScreen;
 import ds.screen.custom.SummoningCauldronScreen;
@@ -45,7 +45,12 @@ public class DarkSwarmClient implements ClientModInitializer {
                 (stack, world, entity, seed) -> ArmorUtil.isFireEnhanced(stack) ? 1.0f : 0.0f
         );
 
-        ArmorRenderer.register(new FireChestplateArmorRenderer(), ModItems.SOUL_CHESTPLATE);
+        ModelPredicateProviderRegistry.register(
+                ModItems.SOUL_CHESTPLATE,
+                Identifier.of(DarkSwarm.MOD_ID, "ice_enhanced"),
+                (stack, world, entity, seed) -> ArmorUtil.isIceEnhanced(stack) ? 1.0f : 0.0f
+        );
 
+        ArmorRenderer.register(new SoulChestplateArmorRenderer(), ModItems.SOUL_CHESTPLATE);
     }
 }

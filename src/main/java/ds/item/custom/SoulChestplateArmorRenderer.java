@@ -17,20 +17,22 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
 
-public class FireChestplateArmorRenderer implements ArmorRenderer {
+public class SoulChestplateArmorRenderer implements ArmorRenderer {
 
-    private static final Identifier SOUL_LAYER_1 =
+    private static final Identifier BASE =
             Identifier.of(DarkSwarm.MOD_ID, "textures/models/armor/soul_armor_layer_1.png");
 
-    private static final Identifier OVERLAY =
+    private static final Identifier FIRE =
             Identifier.of(DarkSwarm.MOD_ID, "textures/models/armor/fire_stone_overlay.png");
+
+    private static final Identifier ICE =
+            Identifier.of(DarkSwarm.MOD_ID, "textures/models/armor/ice_stone_overlay.png");
 
     private BipedEntityModel<LivingEntity> armorModel;
 
     private BipedEntityModel<LivingEntity> getArmorModel() {
         if (armorModel != null) return armorModel;
 
-        // During early init the loader can be null; only create when rendering actually happens.
         var loader = MinecraftClient.getInstance().getEntityModelLoader();
         if (loader == null) return null;
 
@@ -59,14 +61,20 @@ public class FireChestplateArmorRenderer implements ArmorRenderer {
         armorModel.rightArm.visible = true;
         armorModel.leftArm.visible = true;
 
-        // Base armor layer (vanilla would normally render this; registering an ArmorRenderer overrides it).
-        VertexConsumer baseVc = vertexConsumers.getBuffer(RenderLayer.getArmorCutoutNoCull(SOUL_LAYER_1));
-        armorModel.render(matrices, baseVc, light, OverlayTexture.DEFAULT_UV);
+        // base
+        VertexConsumer base = vertexConsumers.getBuffer(RenderLayer.getArmorCutoutNoCull(BASE));
+        armorModel.render(matrices, base, light, OverlayTexture.DEFAULT_UV);
 
-        // Enhancement overlay.
+        // fire overlay
         if (ArmorUtil.isFireEnhanced(stack)) {
-            VertexConsumer overlayVc = vertexConsumers.getBuffer(RenderLayer.getArmorCutoutNoCull(OVERLAY));
-            armorModel.render(matrices, overlayVc, light, OverlayTexture.DEFAULT_UV);
+            VertexConsumer fire = vertexConsumers.getBuffer(RenderLayer.getArmorCutoutNoCull(FIRE));
+            armorModel.render(matrices, fire, light, OverlayTexture.DEFAULT_UV);
+        }
+
+        // ice overlay
+        if (ArmorUtil.isIceEnhanced(stack)) {
+            VertexConsumer ice = vertexConsumers.getBuffer(RenderLayer.getArmorCutoutNoCull(ICE));
+            armorModel.render(matrices, ice, light, OverlayTexture.DEFAULT_UV);
         }
     }
 }

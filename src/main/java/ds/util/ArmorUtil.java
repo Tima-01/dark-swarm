@@ -69,4 +69,21 @@ public class ArmorUtil {
         NbtCompound modData = root.getCompound(DarkSwarm.MOD_ID);
         return modData.getBoolean("fire_enhanced");
     }
+
+    public static boolean isIceEnhanced(PlayerEntity player) {
+        ItemStack chestplate = player.getInventory().getArmorStack(2);
+        if (chestplate.isEmpty() || !chestplate.isOf(ModItems.SOUL_CHESTPLATE)) return false;
+        return isIceEnhanced(chestplate);
+    }
+
+    public static boolean isIceEnhanced(ItemStack stack) {
+        NbtComponent customData = stack.get(DataComponentTypes.CUSTOM_DATA);
+        if (customData == null) return false;
+
+        NbtCompound root = customData.copyNbt();
+        if (!root.contains(DarkSwarm.MOD_ID, NbtCompound.COMPOUND_TYPE)) return false;
+
+        NbtCompound modData = root.getCompound(DarkSwarm.MOD_ID);
+        return modData.getBoolean("ice_enhanced");
+    }
 }
