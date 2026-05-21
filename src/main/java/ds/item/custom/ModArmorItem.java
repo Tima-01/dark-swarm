@@ -5,6 +5,7 @@ import ds.effects.ModEffects;
 import ds.item.ModArmorMaterials;
 import ds.util.ArmorUtil;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ArmorItem;
@@ -57,8 +58,8 @@ public class ModArmorItem extends ArmorItem {
                                             List<StatusEffectInstance> mapStatusEffect) {
         if (!ArmorUtil.hasCorrectArmorOn(mapArmorMaterial, player)) return;
 
-        boolean fireEnhanced = mapArmorMaterial == ModArmorMaterials.SOUL_ARMOR_MATERIAL && ArmorUtil.isFireEnhanced(player);
-        boolean iceEnhanced = mapArmorMaterial == ModArmorMaterials.SOUL_ARMOR_MATERIAL && ArmorUtil.isIceEnhanced(player);
+        boolean fireEnhanced = mapArmorMaterial == ModArmorMaterials.SOUL_ARMOR_MATERIAL && ArmorUtil.hasEnhancement(player, EquipmentSlot.CHEST, ArmorEnhancement.FIRE.getId());
+        boolean iceEnhanced = mapArmorMaterial == ModArmorMaterials.SOUL_ARMOR_MATERIAL && ArmorUtil.hasEnhancement(player, EquipmentSlot.CHEST, ArmorEnhancement.ICE.getId());
 
         for (StatusEffectInstance instance : mapStatusEffect) {
             if (instance.getEffectType() == ModEffects.BLAZING_AURA && !fireEnhanced) continue;

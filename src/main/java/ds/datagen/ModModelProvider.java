@@ -37,7 +37,18 @@ public class ModModelProvider extends FabricModelProvider {
 
         itemModelGenerator.registerArmor(((ArmorItem) ModItems.SOUL_HELMET));
         itemModelGenerator.registerArmor(((ArmorItem) ModItems.SOUL_BOOTS));
-        itemModelGenerator.registerArmor(((ArmorItem) ModItems.SOUL_CHESTPLATE));
         itemModelGenerator.registerArmor(((ArmorItem) ModItems.SOUL_LEGGINGS));
+
+        itemModelGenerator.registerArmor(((ArmorItem) ModItems.SUMMONER_IRON_HELMET));
+        itemModelGenerator.registerArmor(((ArmorItem) ModItems.SUMMONER_IRON_BOOTS));
+        itemModelGenerator.registerArmor(((ArmorItem) ModItems.SUMMONER_IRON_LEGGINGS));
+
+        itemModelGenerator.registerArmor(((ArmorItem) ModItems.SUMMONER_GOLD_HELMET));
+        itemModelGenerator.registerArmor(((ArmorItem) ModItems.SUMMONER_GOLD_BOOTS));
+        itemModelGenerator.registerArmor(((ArmorItem) ModItems.SUMMONER_GOLD_LEGGINGS));
+
+        itemModelGenerator.registerArmor(((ArmorItem) ModItems.SUMMONER_DIAMOND_HELMET));
+        itemModelGenerator.registerArmor(((ArmorItem) ModItems.SUMMONER_DIAMOND_BOOTS));
+        itemModelGenerator.registerArmor(((ArmorItem) ModItems.SUMMONER_DIAMOND_LEGGINGS));
     }
 }

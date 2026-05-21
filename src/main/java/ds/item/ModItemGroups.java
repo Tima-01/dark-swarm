@@ -36,6 +36,21 @@ public class ModItemGroups {
                         entries.add(ModItems.SOUL_CHESTPLATE);
                         entries.add(ModItems.SOUL_BOOTS);
                         entries.add(ModItems.SOUL_LEGGINGS);
+
+                        entries.add(ModItems.SUMMONER_IRON_HELMET);
+                        entries.add(ModItems.SUMMONER_IRON_CHESTPLATE);
+                        entries.add(ModItems.SUMMONER_IRON_BOOTS);
+                        entries.add(ModItems.SUMMONER_IRON_LEGGINGS);
+
+                        entries.add(ModItems.SUMMONER_GOLD_HELMET);
+                        entries.add(ModItems.SUMMONER_GOLD_CHESTPLATE);
+                        entries.add(ModItems.SUMMONER_GOLD_BOOTS);
+                        entries.add(ModItems.SUMMONER_GOLD_LEGGINGS);
+
+                        entries.add(ModItems.SUMMONER_DIAMOND_HELMET);
+                        entries.add(ModItems.SUMMONER_DIAMOND_CHESTPLATE);
+                        entries.add(ModItems.SUMMONER_DIAMOND_BOOTS);
+                        entries.add(ModItems.SUMMONER_DIAMOND_LEGGINGS);
                     }).build());
 
     public static void registerItemGroups() {}
