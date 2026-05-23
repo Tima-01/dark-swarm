@@ -15,10 +15,10 @@ import net.minecraft.entity.passive.TameableEntity;
  */
 public class OwnerUtil {
     public static LivingEntity getOwner(LivingEntity entity) {
-        LivingEntity owner = null;
-        if (entity instanceof TameableEntity tameable) owner = tameable.getOwner() instanceof LivingEntity o ? o : null;
-        if (entity instanceof MinionEntity minion) owner = minion.getOwner();
-        return owner != null ? owner : entity;
+        if(entity instanceof TameableEntity tameable && tameable.getOwner() instanceof LivingEntity owner){
+            return owner;
+        }
+        return entity;
     }
 
     // Determines whether two entities are allied based on shared ownership

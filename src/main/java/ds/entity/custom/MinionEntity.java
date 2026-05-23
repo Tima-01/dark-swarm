@@ -2,22 +2,27 @@ package ds.entity.custom;
 
 import ds.item.custom.OverlordSwordItem;
 import ds.item.custom.OverlordWhipItem;
+import ds.util.MinionManager;
+import ds.util.SummonData;
 import net.minecraft.entity.EntityData;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
+import net.minecraft.entity.attribute.EntityAttributeInstance;
+import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.passive.TameableEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ProjectileUtil;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.SwordItem;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.hit.HitResult;
@@ -26,10 +31,8 @@ import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.UUID;
-
-public class MinionEntity extends TameableEntity {
-
+public class MinionEntity extends TameableEntity implements SummonEntity {
+    private Identifier healthModifierId;
     public MinionEntity(EntityType<? extends TameableEntity> entityType, World world) {
         super(entityType, world);
 
@@ -75,11 +78,17 @@ public class MinionEntity extends TameableEntity {
     @Override
     public void writeCustomDataToNbt(NbtCompound nbt) {
         super.writeCustomDataToNbt(nbt);
+        if(healthModifierId != null) {
+            nbt.putString("HealthModifierId", healthModifierId.toString());
+        }
     }
 
     @Override
     public void readCustomDataFromNbt(NbtCompound nbt) {
         super.readCustomDataFromNbt(nbt);
+        if(nbt.contains("HealthModifierId")) {
+            healthModifierId = Identifier.tryParse(nbt.getString("HealthModifierId"));
+        }
     }
     @Override
     public boolean cannotDespawn() {
@@ -99,6 +108,11 @@ public class MinionEntity extends TameableEntity {
 
     public boolean isBusyFighting() {
         return this.getTarget() != null && this.getTarget().isAlive();
+    }
+
+    @Override
+    public float getHealthCost() {
+        return 2f;
     }
 
 
@@ -188,10 +202,53 @@ public class MinionEntity extends TameableEntity {
         }
     }
 
+    public void returnHealthToOwner() {
+        if (getWorld().isClient()) return;
+
+        if (!(getOwner() instanceof PlayerEntity player)) return;
+        if (healthModifierId == null) return;
+
+        EntityAttributeInstance maxHealth =
+                player.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH);
+
+        if (maxHealth == null) return;
+
+        EntityAttributeModifier modifier =
+                maxHealth.getModifier(healthModifierId);
+
+        if (modifier != null) {
+            maxHealth.removeModifier(modifier);
+        }
+
+        if (player.getHealth() > player.getMaxHealth()) {
+            player.setHealth(player.getMaxHealth());
+        }
+    }
+
+    @Override
+    public void onDeath(DamageSource source) {
+        super.onDeath(source);
+
+        if (getOwner() != null) {
+            MinionManager.remove(getOwnerUuid(), getUuid());
+        }
+
+        returnHealthToOwner();
+    }
+
+
     @Override
     public boolean isBreedingItem(ItemStack stack) { return false; }
 
     @Nullable
     @Override
     public PassiveEntity createChild(ServerWorld world, PassiveEntity entity) { return null; }
+
+    public void setHealthModifierId(Identifier id) {
+        this.healthModifierId = id;
+    }
+
+    public Identifier getHealthModifierId() {
+        return healthModifierId;
+    }
 }

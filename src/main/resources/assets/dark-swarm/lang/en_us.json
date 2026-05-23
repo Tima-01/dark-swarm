@@ -45,6 +45,7 @@
   "gui.dark-swarm.summoning_cauldron": "Summoning cauldron",
   "gui.dark-swarm.inlay_table": "Inlay table",
   "gui.dark-swarm.affected_minions": "Affected creatures",
+  "gui.dark-swarm.summoning_cauldron.not_enough_health": "Not enough health",
 
   "entity.dark-swarm.minion": "Cute lil creature",
   "entity.dark-swarm.soul_eater": "Soul eater",

@@ -44,6 +44,7 @@
   "gui.dark-swarm.summoning_cauldron": "Чан призыва",
   "gui.dark-swarm.inlay_table": "Стол инкрустации",
   "gui.dark-swarm.affected_minions": "Сущности под влиянием",
+  "gui.dark-swarm.summoning_cauldron.not_enough_health": "Недостаточно здоровья",
 
   "entity.dark-swarm.minion": "Квакозябра обыкновенная",
   "entity.dark-swarm.soul_eater": "Пожиратель душ",
