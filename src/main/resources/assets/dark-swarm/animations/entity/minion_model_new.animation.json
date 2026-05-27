@@ -1,0 +1,60 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"animation.newMinion.walk": {
+			"loop": true,
+			"animation_length": 0.875,
+			"bones": {
+				"bone7": {
+					"rotation": {
+						"vector": [-15, 0, 0]
+					},
+					"position": {
+						"vector": [0, 0.5, 1]
+					}
+				},
+				"bashka": {
+					"position": {
+						"vector": [0, 1.25, 0]
+					}
+				},
+				"noga_levo": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"0.875": {
+							"vector": [-362.5, 0, 0]
+						}
+					},
+					"position": {
+						"vector": [0, -1, 0]
+					}
+				},
+				"tail": {
+					"position": {
+						"vector": [0, -1.5, 0]
+					}
+				},
+				"noga_levo2": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"0.875": {
+							"vector": [360, 0, 0]
+						}
+					},
+					"position": {
+						"vector": [0, -1, 0]
+					}
+				},
+				"jivot": {
+					"rotation": {
+						"vector": [-12.5, 0, 0]
+					}
+				}
+			}
+		}
+	}
+}

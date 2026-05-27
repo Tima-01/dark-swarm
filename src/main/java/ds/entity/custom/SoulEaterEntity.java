@@ -69,6 +69,7 @@ public class SoulEaterEntity extends PathAwareEntity implements GeoEntity {
                         0.01
                 );
             }
+            //fsdfsdfdsfsdf
             else if (stack.isOf(ModItems.PROFANED_SOUL)) {
                 if(player.getItemCooldownManager().isCoolingDown(ModItems.PROFANED_SOUL)) return ActionResult.PASS;
                 if (this.random.nextFloat() < 0.5f) {
