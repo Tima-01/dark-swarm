@@ -5,6 +5,7 @@ import ds.block.entity.renderer.IceSpikeEntityRenderer;
 import ds.block.entity.renderer.NetherSpikeEntityRenderer;
 import ds.entity.ModEntities;
 import ds.entity.client.MinionModel;
+import ds.entity.client.MinionNewRenderer;
 import ds.entity.client.MinionRenderer;
 import ds.entity.client.SoulEaterRenderer;
 import ds.item.ModItems;
@@ -32,6 +33,7 @@ public class DarkSwarmClient implements ClientModInitializer {
         EntityRendererRegistry.register(ModEntities.MINION, MinionRenderer::new);
 
         EntityRendererRegistry.register(ModEntities.SOUL_EATER, SoulEaterRenderer::new);
+        EntityRendererRegistry.register(ModEntities.MINION_NEW, MinionNewRenderer::new);
 
         BlockEntityRendererFactories.register(ModBlockEntities.NETHER_SPIKE_ENTITY_BE, NetherSpikeEntityRenderer::new);
 
