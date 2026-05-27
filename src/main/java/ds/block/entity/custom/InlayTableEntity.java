@@ -44,35 +44,14 @@ public class InlayTableEntity extends BlockEntity
         return inventory;
     }
 
-//    public boolean canCraft() {
-//        return getStack(SOUL_SLOT).isOf(ModItems.SOUL)
-//                && getStack(PROPERTY_SLOT).isOf(Items.BLAZE_ROD)
-//                && getStack(MATERIAL_SLOT).isOf(Items.DIAMOND);
-//    }
-
-//    public ItemStack getResultItem() {
-//        return canCraft() ? new ItemStack(ModItems.PROFANED_SOUL) : ItemStack.EMPTY;
-//    }
-
     public void updateResult() {
-        if (world == null) {
-            LOGGER.info("World is NULL");
-            return;
-        }
+        if (world == null) return;
 
-        if (world.isClient) {
-            LOGGER.info("Client side - skipping");
-            return;
-        }
+        if (world.isClient) return;
 
         ItemStack soul = getStack(SOUL_SLOT);
         ItemStack property = getStack(PROPERTY_SLOT);
         ItemStack material = getStack(MATERIAL_SLOT);
-
-        LOGGER.info("=== UPDATE RESULT ===");
-        LOGGER.info("Soul: {}", soul);
-        LOGGER.info("Property: {}", property);
-        LOGGER.info("Material: {}", material);
 
         InlayTableRecipeInput input = new InlayTableRecipeInput(
                 soul,
@@ -84,16 +63,11 @@ public class InlayTableEntity extends BlockEntity
                 .getFirstMatch(ModRecipes.INLAY_TABLE_TYPE, input, world);
 
         if (match.isEmpty()) {
-            LOGGER.info("❌ NO RECIPE FOUND");
             inventory.set(RESULT_SLOT, ItemStack.EMPTY);
             return;
         }
 
-        LOGGER.info("✅ RECIPE FOUND: {}", match.get().id());
-
         ItemStack result = match.get().value().craft(input, world.getRegistryManager());
-
-        LOGGER.info("➡ RESULT: {}", result);
 
         inventory.set(RESULT_SLOT, result);
     }
@@ -108,9 +82,6 @@ public class InlayTableEntity extends BlockEntity
 
     public void onInventoryChanged() {
         if (world == null || world.isClient) return;
-
-        LOGGER.info("Inventory changed!");
-
         updateResult();
         markDirty();
     }

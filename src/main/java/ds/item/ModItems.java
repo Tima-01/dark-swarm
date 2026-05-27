@@ -21,6 +21,9 @@ public class ModItems {
     public static final Item PROFANED_SOUL = registerItem("profaned_soul", new Item(new Item.Settings()));
     public static final Item HANDLE = registerItem("handle", new Item(new Item.Settings()));
     public static final Item FIRE_STONE = registerItem("fire_stone", new Item(new Item.Settings()));
+    public static final Item ICE_STONE = registerItem("ice_stone", new Item(new Item.Settings()));
+    public static final Item FIRE_ESSENCE = registerItem("fire_essence", new Item(new Item.Settings()));
+    public static final Item ICE_ESSENCE = registerItem("ice_essence", new Item(new Item.Settings()));
 
     //инструменты
     public static final Item OVERLORD_SWORD = registerItem("overlord_sword",
@@ -32,18 +35,57 @@ public class ModItems {
     //предметы брони
     public static final Item SOUL_HELMET = registerItem("soul_helmet",
             new ModArmorItem(ModArmorMaterials.SOUL_ARMOR_MATERIAL, ArmorItem.Type.HELMET, new Item.Settings()
-                    .maxDamage(ArmorItem.Type.HELMET.getMaxDamage(15))));
-
+                    .maxDamage(ArmorItem.Type.HELMET.getMaxDamage(11))));
     public static final Item SOUL_CHESTPLATE = registerItem("soul_chestplate",
             new ArmorItem(ModArmorMaterials.SOUL_ARMOR_MATERIAL, ArmorItem.Type.CHESTPLATE, new Item.Settings()
-                    .maxDamage(ArmorItem.Type.CHESTPLATE.getMaxDamage(15))));
-
+                    .maxDamage(ArmorItem.Type.CHESTPLATE.getMaxDamage(16))));
     public static final Item SOUL_BOOTS = registerItem("soul_boots",
             new ArmorItem(ModArmorMaterials.SOUL_ARMOR_MATERIAL, ArmorItem.Type.BOOTS, new Item.Settings()
-                    .maxDamage(ArmorItem.Type.BOOTS.getMaxDamage(15))));
-
+                    .maxDamage(ArmorItem.Type.BOOTS.getMaxDamage(13))));
     public static final Item SOUL_LEGGINGS = registerItem("soul_leggings",
             new ArmorItem(ModArmorMaterials.SOUL_ARMOR_MATERIAL, ArmorItem.Type.LEGGINGS, new Item.Settings()
+                    .maxDamage(ArmorItem.Type.LEGGINGS.getMaxDamage(15))));
+
+    //iron tier
+    public static final Item SUMMONER_IRON_HELMET = registerItem("summoner_iron_helmet",
+            new ModArmorItem(ModArmorMaterials.SUMMONER_IRON_ARMOR_MATERIAL, ArmorItem.Type.HELMET, new Item.Settings()
+                    .maxDamage(ArmorItem.Type.HELMET.getMaxDamage(11))));
+    public static final Item SUMMONER_IRON_CHESTPLATE = registerItem("summoner_iron_chestplate",
+            new ArmorItem(ModArmorMaterials.SUMMONER_IRON_ARMOR_MATERIAL, ArmorItem.Type.CHESTPLATE, new Item.Settings()
+                    .maxDamage(ArmorItem.Type.CHESTPLATE.getMaxDamage(16))));
+    public static final Item SUMMONER_IRON_BOOTS = registerItem("summoner_iron_boots",
+            new ArmorItem(ModArmorMaterials.SUMMONER_IRON_ARMOR_MATERIAL, ArmorItem.Type.BOOTS, new Item.Settings()
+                    .maxDamage(ArmorItem.Type.BOOTS.getMaxDamage(13))));
+    public static final Item SUMMONER_IRON_LEGGINGS = registerItem("summoner_iron_leggings",
+            new ArmorItem(ModArmorMaterials.SUMMONER_IRON_ARMOR_MATERIAL, ArmorItem.Type.LEGGINGS, new Item.Settings()
+                    .maxDamage(ArmorItem.Type.LEGGINGS.getMaxDamage(15))));
+
+    //gold tier
+    public static final Item SUMMONER_GOLD_HELMET = registerItem("summoner_gold_helmet",
+            new ModArmorItem(ModArmorMaterials.SUMMONER_GOLD_ARMOR_MATERIAL, ArmorItem.Type.HELMET, new Item.Settings()
+                    .maxDamage(ArmorItem.Type.HELMET.getMaxDamage(11))));
+    public static final Item SUMMONER_GOLD_CHESTPLATE = registerItem("summoner_gold_chestplate",
+            new ArmorItem(ModArmorMaterials.SUMMONER_GOLD_ARMOR_MATERIAL, ArmorItem.Type.CHESTPLATE, new Item.Settings()
+                    .maxDamage(ArmorItem.Type.CHESTPLATE.getMaxDamage(16))));
+    public static final Item SUMMONER_GOLD_BOOTS = registerItem("summoner_gold_boots",
+            new ArmorItem(ModArmorMaterials.SUMMONER_GOLD_ARMOR_MATERIAL, ArmorItem.Type.BOOTS, new Item.Settings()
+                    .maxDamage(ArmorItem.Type.BOOTS.getMaxDamage(13))));
+    public static final Item SUMMONER_GOLD_LEGGINGS = registerItem("summoner_gold_leggings",
+            new ArmorItem(ModArmorMaterials.SUMMONER_GOLD_ARMOR_MATERIAL, ArmorItem.Type.LEGGINGS, new Item.Settings()
+                    .maxDamage(ArmorItem.Type.LEGGINGS.getMaxDamage(15))));
+
+    //iron tier
+    public static final Item SUMMONER_DIAMOND_HELMET = registerItem("summoner_diamond_helmet",
+            new ModArmorItem(ModArmorMaterials.SUMMONER_DIAMOND_ARMOR_MATERIAL, ArmorItem.Type.HELMET, new Item.Settings()
+                    .maxDamage(ArmorItem.Type.HELMET.getMaxDamage(11))));
+    public static final Item SUMMONER_DIAMOND_CHESTPLATE = registerItem("summoner_diamond_chestplate",
+            new ArmorItem(ModArmorMaterials.SUMMONER_DIAMOND_ARMOR_MATERIAL, ArmorItem.Type.CHESTPLATE, new Item.Settings()
+                    .maxDamage(ArmorItem.Type.CHESTPLATE.getMaxDamage(16))));
+    public static final Item SUMMONER_DIAMOND_BOOTS = registerItem("summoner_diamond_boots",
+            new ArmorItem(ModArmorMaterials.SUMMONER_DIAMOND_ARMOR_MATERIAL, ArmorItem.Type.BOOTS, new Item.Settings()
+                    .maxDamage(ArmorItem.Type.BOOTS.getMaxDamage(13))));
+    public static final Item SUMMONER_DIAMOND_LEGGINGS = registerItem("summoner_diamond_leggings",
+            new ArmorItem(ModArmorMaterials.SUMMONER_DIAMOND_ARMOR_MATERIAL, ArmorItem.Type.LEGGINGS, new Item.Settings()
                     .maxDamage(ArmorItem.Type.LEGGINGS.getMaxDamage(15))));
 
     //misc
@@ -62,6 +104,7 @@ public class ModItems {
             entries.add(SOUL);
             entries.add(PROFANED_SOUL);
             entries.add(FIRE_STONE);
+            entries.add(ICE_STONE);
         });
         // Это боевая категория
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.COMBAT).register(entries -> {

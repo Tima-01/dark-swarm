@@ -155,7 +155,7 @@ public class OverlordWhipItem extends SwordItem implements GeoItem {
                     range
             );
             if (hit != null && hit.getEntity() instanceof LivingEntity target) {
-                double radius = 20.0;
+                double radius = 50.0;
                 for (MobEntity mob : world.getEntitiesByClass(
                         MobEntity.class,
                         player.getBoundingBox().expand(radius),

@@ -2,6 +2,7 @@ package ds.util;
 
 import ds.entity.custom.MinionEntity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.passive.TameableEntity;
 /**
  * Utility class for resolving ownership and alliance relationships between entities.
@@ -14,11 +15,12 @@ import net.minecraft.entity.passive.TameableEntity;
  */
 public class OwnerUtil {
     public static LivingEntity getOwner(LivingEntity entity) {
-        LivingEntity owner = null;
-        if (entity instanceof TameableEntity tameable) owner = tameable.getOwner() instanceof LivingEntity o ? o : null;
-        if (entity instanceof MinionEntity minion) owner = minion.getOwner();
-        return owner != null ? owner : entity;
+        if(entity instanceof TameableEntity tameable && tameable.getOwner() instanceof LivingEntity owner){
+            return owner;
+        }
+        return entity;
     }
+
     // Determines whether two entities are allied based on shared ownership
     public static boolean isAllied(LivingEntity a, LivingEntity b) {
         return getOwner(a) == getOwner(b);

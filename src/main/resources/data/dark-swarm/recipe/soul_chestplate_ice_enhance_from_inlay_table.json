@@ -1,0 +1,23 @@
+{
+  "type": "dark-swarm:inlay_table",
+  "soul": {
+    "item": "dark-swarm:soul"
+  },
+  "property": {
+    "item": "dark-swarm:ice_stone"
+  },
+  "material": {
+    "item": "dark-swarm:soul_chestplate"
+  },
+  "result": {
+    "id": "dark-swarm:soul_chestplate",
+    "count": 1,
+    "components": {
+      "minecraft:custom_data": {
+        "dark-swarm": {
+          "ice_enhanced": true
+        }
+      }
+    }
+  }
+}

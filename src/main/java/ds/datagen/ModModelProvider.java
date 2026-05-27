@@ -27,6 +27,9 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ModItems.SOUL, Models.GENERATED);
         itemModelGenerator.register(ModItems.PROFANED_SOUL, Models.GENERATED);
         itemModelGenerator.register(ModItems.FIRE_STONE, Models.GENERATED);
+        itemModelGenerator.register(ModItems.ICE_STONE, Models.GENERATED);
+        itemModelGenerator.register(ModItems.FIRE_ESSENCE, Models.GENERATED);
+        itemModelGenerator.register(ModItems.ICE_ESSENCE, Models.GENERATED);
         itemModelGenerator.register(ModItems.HANDLE, Models.GENERATED);
 
         itemModelGenerator.register(ModItems.MINION_SPAWN_EGG, new Model(Optional.of(Identifier.of("item/template_spawn_egg")), Optional.empty()));
@@ -34,7 +37,18 @@ public class ModModelProvider extends FabricModelProvider {
 
         itemModelGenerator.registerArmor(((ArmorItem) ModItems.SOUL_HELMET));
         itemModelGenerator.registerArmor(((ArmorItem) ModItems.SOUL_BOOTS));
-        itemModelGenerator.registerArmor(((ArmorItem) ModItems.SOUL_CHESTPLATE));
         itemModelGenerator.registerArmor(((ArmorItem) ModItems.SOUL_LEGGINGS));
+
+        itemModelGenerator.registerArmor(((ArmorItem) ModItems.SUMMONER_IRON_HELMET));
+        itemModelGenerator.registerArmor(((ArmorItem) ModItems.SUMMONER_IRON_BOOTS));
+        itemModelGenerator.registerArmor(((ArmorItem) ModItems.SUMMONER_IRON_LEGGINGS));
+
+        itemModelGenerator.registerArmor(((ArmorItem) ModItems.SUMMONER_GOLD_HELMET));
+        itemModelGenerator.registerArmor(((ArmorItem) ModItems.SUMMONER_GOLD_BOOTS));
+        itemModelGenerator.registerArmor(((ArmorItem) ModItems.SUMMONER_GOLD_LEGGINGS));
+
+        itemModelGenerator.registerArmor(((ArmorItem) ModItems.SUMMONER_DIAMOND_HELMET));
+        itemModelGenerator.registerArmor(((ArmorItem) ModItems.SUMMONER_DIAMOND_BOOTS));
+        itemModelGenerator.registerArmor(((ArmorItem) ModItems.SUMMONER_DIAMOND_LEGGINGS));
     }
 }

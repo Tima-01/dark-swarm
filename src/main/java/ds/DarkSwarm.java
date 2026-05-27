@@ -3,6 +3,7 @@ package ds;
 import ds.block.entity.ModBlockEntities;
 import ds.effects.ModEffects;
 import ds.entity.ModEntities;
+import ds.events.ModEvents;
 import ds.item.ModItemGroups;
 import ds.item.ModItems;
 import ds.recipe.ModRecipes;
@@ -26,7 +27,7 @@ public class DarkSwarm implements ModInitializer {
 		ModLootTableModifiers.modifyLootTables();
 		ModBlockEntities.registerBlockEntities();
 		ModScreenHandlers.registerScreenHandlers();
-
+		ModEvents.registerEvents();
 		ModEntities.registerModEntities();
         ModRecipes.registerRecipes();
         ModEffects.registerEffects();
