@@ -208,13 +208,11 @@ public class MinionEntity extends TameableEntity implements SummonEntity {
         if (!(getOwner() instanceof PlayerEntity player)) return;
         if (healthModifierId == null) return;
 
-        EntityAttributeInstance maxHealth =
-                player.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH);
+        EntityAttributeInstance maxHealth = player.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH);
 
         if (maxHealth == null) return;
 
-        EntityAttributeModifier modifier =
-                maxHealth.getModifier(healthModifierId);
+        EntityAttributeModifier modifier = maxHealth.getModifier(healthModifierId);
 
         if (modifier != null) {
             maxHealth.removeModifier(modifier);

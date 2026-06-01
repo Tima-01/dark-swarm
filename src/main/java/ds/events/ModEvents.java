@@ -1,9 +1,11 @@
 package ds.events;
 
 import ds.entity.custom.MinionEntity;
+import ds.events.custom.HealthWatcher;
 import ds.util.MinionManager;
 import ds.util.SummonData;
 import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.minecraft.entity.Entity;
 import net.minecraft.server.network.ServerPlayerEntity;
 
@@ -30,6 +32,13 @@ public class ModEvents {
                     minion.discard();
                 }
             }
+        });
+        ServerTickEvents.END_SERVER_TICK.register(server -> {
+            server.getPlayerManager()
+                    .getPlayerList()
+                    .forEach(
+                            HealthWatcher::tick
+                    );
         });
     }
 }

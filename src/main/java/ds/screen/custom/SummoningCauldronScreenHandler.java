@@ -47,7 +47,7 @@ public class SummoningCauldronScreenHandler extends ScreenHandler {
             notEnoughHealth = false;
             EntityAttributeInstance maxHealth = player.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH);
             if (maxHealth == null) { return true; }
-            if (player.getMaxHealth() <= 2.0f) {
+            if (player.getMaxHealth() <= 1.0f) {
                 notEnoughHealth = true;
                 sendContentUpdates();
                 return true;
@@ -76,7 +76,7 @@ public class SummoningCauldronScreenHandler extends ScreenHandler {
 
                     summon.refreshPositionAndAngles(
                             pos.getX() + 0.5,
-                            pos.getY() + 0.3,
+                            pos.getY() + 1,
                             pos.getZ() + 0.5,
                             0,
                             0
