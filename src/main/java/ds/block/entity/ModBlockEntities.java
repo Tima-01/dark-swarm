@@ -2,10 +2,7 @@ package ds.block.entity;
 
 import ds.DarkSwarm;
 import ds.block.ModBlocks;
-import ds.block.entity.custom.IceSpikeEntity;
-import ds.block.entity.custom.InlayTableEntity;
-import ds.block.entity.custom.NetherSpikeEntity;
-import ds.block.entity.custom.SummoningCauldronEntity;
+import ds.block.entity.custom.*;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
@@ -15,6 +12,10 @@ public class ModBlockEntities {
     public static final BlockEntityType<SummoningCauldronEntity> SUMMONING_CAULDRON_ENTITY_BE =
             Registry.register(Registries.BLOCK_ENTITY_TYPE, Identifier.of(DarkSwarm.MOD_ID, "summoning_cauldron_be"),
                     BlockEntityType.Builder.create(SummoningCauldronEntity::new, ModBlocks.SUMMONING_CAULDRON).build(null));
+
+    public static final BlockEntityType<SoulExtractorEntity> SOUL_EXTRACTOR_ENTITY_BE =
+            Registry.register(Registries.BLOCK_ENTITY_TYPE, Identifier.of(DarkSwarm.MOD_ID, "soul_extractor_be"),
+                    BlockEntityType.Builder.create(SoulExtractorEntity::new, ModBlocks.SOUL_EXTRACTOR).build(null));
 
     public static final BlockEntityType<InlayTableEntity> INLAY_TABLE_ENTITY_BE =
             Registry.register(Registries.BLOCK_ENTITY_TYPE, Identifier.of(DarkSwarm.MOD_ID, "inlay_table_be"),

@@ -1,6 +1,9 @@
 package ds.item;
 
 import ds.DarkSwarm;
+import ds.effects.ModEffects;
+import ds.util.OwnerUtil;
+import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterial;
 import net.minecraft.recipe.Ingredient;
@@ -17,7 +20,11 @@ import java.util.List;
 import java.util.function.Supplier;
 
 public class ModArmorMaterials {
-
+    /**
+     * Тут ты регистрируешь тир брони
+     * @see net.minecraft.item.ArmorMaterials для референсов параметров брони
+     */
+    // Когда текстуру для брони добавляешь название должно быть таким: "name_layer_1.png" так же и для второго слоя.
     public static final RegistryEntry<ArmorMaterial> SOUL_ARMOR_MATERIAL = registerArmorMaterial("soul_armor",
             () -> new ArmorMaterial(Util.make(new EnumMap<>(ArmorItem.Type.class), map -> {
                 map.put(ArmorItem.Type.BOOTS,1);

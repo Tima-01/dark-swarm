@@ -63,7 +63,6 @@ public class OverlordWhipItem extends SwordItem implements GeoItem {
     }
 
 
-
     public static AttributeModifiersComponent createAttributeModifiers(ToolMaterial material, int baseAttackDamage, float attackSpeed) {
         return AttributeModifiersComponent.builder()
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE,

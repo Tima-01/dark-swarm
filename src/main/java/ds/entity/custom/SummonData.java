@@ -1,4 +1,4 @@
-package ds.util;
+package ds.entity.custom;
 
 import java.util.UUID;
 

@@ -58,22 +58,6 @@ public class SummoningCauldronScreenHandler extends ScreenHandler {
                 var world = player.getWorld();
                 var summon = ModEntities.MINION.create(world);
                 if (summon != null) {
-                    Identifier modifierId = Identifier.of(
-                            "dark-swarm",
-                            "minion_health_" + UUID.randomUUID()
-                    );
-                    EntityAttributeModifier modifier = new EntityAttributeModifier(
-                            modifierId,
-                            -2.0,
-                            EntityAttributeModifier.Operation.ADD_VALUE
-                    );
-
-                    maxHealth.addPersistentModifier(modifier);
-
-                    if (player.getHealth() > player.getMaxHealth()) { player.setHealth(player.getMaxHealth()); }
-
-                    summon.setHealthModifierId(modifierId);
-
                     summon.refreshPositionAndAngles(
                             pos.getX() + 0.5,
                             pos.getY() + 1,
@@ -84,11 +68,6 @@ public class SummoningCauldronScreenHandler extends ScreenHandler {
                     summon.setOwner(player);
                     summon.setTamed(true, true);
                     world.spawnEntity(summon);
-                    MinionManager.push(
-                            player.getUuid(),
-                            summon.getUuid(),
-                            summon.getHealthCost()
-                    );
                 }
             }
             sendContentUpdates();

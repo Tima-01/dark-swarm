@@ -3,7 +3,6 @@ package ds.entity.custom;
 import ds.item.custom.OverlordSwordItem;
 import ds.item.custom.OverlordWhipItem;
 import ds.util.MinionManager;
-import ds.util.SummonData;
 import net.minecraft.entity.EntityData;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;

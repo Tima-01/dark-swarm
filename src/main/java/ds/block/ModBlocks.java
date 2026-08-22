@@ -1,10 +1,7 @@
 package ds.block;
 
 import ds.DarkSwarm;
-import ds.block.custom.IceSpike;
-import ds.block.custom.InlayTable;
-import ds.block.custom.NetherSpike;
-import ds.block.custom.SummoningCauldron;
+import ds.block.custom.*;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
@@ -19,6 +16,9 @@ public class ModBlocks{
 
     public static final Block SUMMONING_CAULDRON = registerBlock("summoning_cauldron",
             new SummoningCauldron(AbstractBlock.Settings.create().strength(1f).requiresTool()));
+
+    public static final Block SOUL_EXTRACTOR = registerBlock("soul_extractor",
+            new SoulExtractor(AbstractBlock.Settings.create().strength(1f).requiresTool()));
 
     public static final Block INLAY_TABLE = registerBlock("inlay_table",
             new InlayTable(AbstractBlock.Settings.create().strength(1f).requiresTool()));
@@ -44,6 +44,7 @@ public class ModBlocks{
             entries.add(ICE_SPIKE);
             entries.add(NETHER_SPIKE);
             entries.add(SUMMONING_CAULDRON);
+            entries.add(SOUL_EXTRACTOR);
             entries.add(INLAY_TABLE);
         });
     }
