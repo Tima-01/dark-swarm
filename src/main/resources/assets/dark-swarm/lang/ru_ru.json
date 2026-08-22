@@ -37,14 +37,23 @@
   "effect.dark-swarm.freezing_presence": "Леденящее присутствие",
 
   "block.dark-swarm.summoning_cauldron": "Чан призыва",
+  "block.dark-swarm.soul_extractor": "Извлекатель душ",
   "block.dark-swarm.inlay_table": "Стол инкрустации",
   "block.dark-swarm.nether_spike": "Адский шип",
+  "block.dark-swarm.ice_spike": "Ледяной шип",
 
   "gui.dark-swarm.summoning_cauldron.summon": "Призвать",
   "gui.dark-swarm.summoning_cauldron": "Чан призыва",
+  "gui.dark-swarm.soul_extractor": "Извлекатель душ",
   "gui.dark-swarm.inlay_table": "Стол инкрустации",
   "gui.dark-swarm.affected_minions": "Сущности под влиянием",
-  "gui.dark-swarm.summoning_cauldron.not_enough_health": "Недостаточно здоровья",
+  "gui.dark-swarm.soul_extractor.not_enough_health": "Недостаточно здоровья",  "gui.dark-swarm.soul_extractor.output_full": "Output is full",
+  "gui.dark-swarm.soul_extractor.no_soul": "Нет души",
+  "gui.dark-swarm.soul_extractor.restore": "Восстановить",
+  "gui.dark-swarm.soul_extractor.extract": "Извлечь",
+  "gui.dark-swarm.summoning_cauldron.minion_title": "Квакозябра",
+  "gui.dark-swarm.summoning_cauldron.minion_description": "Квакозябра, слабое существо которое будет отчаянно защищать своего хозяина не смотря на то, что имеет слишком короткие лапы для полноценной атаки. На удивление, некоторые находят это существо милым.",
+
 
   "entity.dark-swarm.minion": "Квакозябра обыкновенная",
   "entity.dark-swarm.soul_eater": "Пожиратель душ",

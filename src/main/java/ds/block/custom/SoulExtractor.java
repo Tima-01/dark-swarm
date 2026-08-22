@@ -2,7 +2,6 @@ package ds.block.custom;
 
 import com.mojang.serialization.MapCodec;
 import ds.block.entity.custom.SoulExtractorEntity;
-import ds.block.entity.custom.SummoningCauldronEntity;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -74,8 +73,8 @@ public class SoulExtractor extends BlockWithEntity implements BlockEntityProvide
     protected void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
         if(state.getBlock() != newState.getBlock()) {
             BlockEntity blockEntity = world.getBlockEntity(pos);
-            if(blockEntity instanceof SummoningCauldronEntity) {
-                ItemScatterer.spawn(world, pos, ((SummoningCauldronEntity) blockEntity));
+            if(blockEntity instanceof SoulExtractorEntity) {
+                ItemScatterer.spawn(world, pos, ((SoulExtractorEntity) blockEntity));
                 world.updateComparators(pos, this);
             }
             super.onStateReplaced(state, world, pos, newState, moved);
@@ -85,9 +84,9 @@ public class SoulExtractor extends BlockWithEntity implements BlockEntityProvide
     @Override
     protected ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
 
-        if(world.getBlockEntity(pos) instanceof SummoningCauldronEntity summoningCauldronEntity) {
+        if(world.getBlockEntity(pos) instanceof SoulExtractorEntity soulExtractorEntity) {
             if(!world.isClient()) {
-                player.openHandledScreen(summoningCauldronEntity);
+                player.openHandledScreen(soulExtractorEntity);
             }
         }
 

@@ -1,6 +1,5 @@
 package ds.screen.custom;
 
-import ds.entity.ModEntities;
 import ds.item.ModItems;
 import ds.screen.ModScreenHandlers;
 import net.minecraft.block.entity.BlockEntity;
@@ -28,7 +27,7 @@ public class SoulExtractorScreenHandler extends ScreenHandler {
 
     private boolean notEnoughHealth = false;
     private boolean outputFull = false;
-
+    private boolean noSoul = false;
 
     public SoulExtractorScreenHandler(int syncId, PlayerInventory playerInventory, BlockPos pos) {
         this(syncId, playerInventory, pos, playerInventory.player.getWorld().getBlockEntity(pos));
@@ -40,7 +39,6 @@ public class SoulExtractorScreenHandler extends ScreenHandler {
         this.pos = pos;
         this.inventory = (Inventory) blockEntity;
 
-//        Soul Slot
         this.addSlot(
                 new Slot(inventory, 0, 92, 35) {
 
@@ -50,7 +48,9 @@ public class SoulExtractorScreenHandler extends ScreenHandler {
                     }
 
                     @Override
-                    public boolean canTakeItems(PlayerEntity playerEntity) {
+                    public boolean canTakeItems(
+                            PlayerEntity playerEntity
+                    ) {
                         return true;
                     }
 
@@ -65,64 +65,96 @@ public class SoulExtractorScreenHandler extends ScreenHandler {
         addPlayerInventory(playerInventory);
     }
 
-
     @Override
     public boolean onButtonClick(PlayerEntity player, int id) {
-        if (id != 0) return super.onButtonClick(player, id);
-
-        if (player.getWorld().isClient()) return true;
+        if (player.getWorld().isClient())
+            return true;
 
         notEnoughHealth = false;
         outputFull = false;
+        noSoul = false;
 
+
+        if (id == 0) {
+            extractSoul(player);
+            sendContentUpdates();
+            return true;
+        }
+
+        if (id == 1) {
+            restoreHeart(player);
+            sendContentUpdates();
+            return true;
+        }
+
+        return super.onButtonClick(player, id);
+    }
+
+    private void extractSoul(PlayerEntity player) {
         ItemStack output = inventory.getStack(0);
 
         if (!output.isEmpty() && output.isOf(ModItems.SOUL) && output.getCount() >= output.getMaxCount()) {
             outputFull = true;
-            sendContentUpdates();
-            return true;
+            return;
         }
 
         if (!output.isEmpty() && !output.isOf(ModItems.SOUL)) {
             outputFull = true;
-            sendContentUpdates();
-            return true;
+            return;
         }
 
         if (player.getMaxHealth() - SOUL_COST < MIN_MAX_HEALTH) {
             notEnoughHealth = true;
-            sendContentUpdates();
-            return true;
+            return;
+        }
+        EntityAttributeInstance maxHealth = player.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH);
+
+        if (maxHealth == null)
+            return;
+
+
+        Identifier modifierId = Identifier.of("dark-swarm", "soul_" + UUID.randomUUID());
+
+        EntityAttributeModifier modifier = new EntityAttributeModifier(modifierId, -SOUL_COST, EntityAttributeModifier.Operation.ADD_VALUE);
+
+        maxHealth.addPersistentModifier(modifier);
+
+        if (player.getHealth() > player.getMaxHealth())
+            player.setHealth(player.getMaxHealth());
+
+        if (output.isEmpty()) {
+            inventory.setStack(0, new ItemStack(ModItems.SOUL, 1));
+        } else {
+            output.increment(1);
+            inventory.markDirty();
+        }
+    }
+
+    private void restoreHeart(PlayerEntity player) {
+
+        ItemStack output = inventory.getStack(0);
+
+        if (output.isEmpty() || !output.isOf(ModItems.SOUL) || output.getCount() <= 0) {
+            noSoul = true;
+            return;
         }
 
         EntityAttributeInstance maxHealth = player.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH);
 
-        if (maxHealth == null) return true;
+        if (maxHealth == null)
+            return;
 
-        Identifier modifierId = Identifier.of(
-                "dark-swarm",
-                "soul_" + UUID.randomUUID()
-        );
+        Identifier modifierId = Identifier.of("dark-swarm", "restored_soul_" + UUID.randomUUID());
 
-        EntityAttributeModifier modifier = new EntityAttributeModifier(modifierId, -SOUL_COST, EntityAttributeModifier.Operation.ADD_VALUE);
+        EntityAttributeModifier modifier = new EntityAttributeModifier(modifierId, SOUL_COST, EntityAttributeModifier.Operation.ADD_VALUE);
+
         maxHealth.addPersistentModifier(modifier);
 
-        if (player.getHealth() > player.getMaxHealth()) {
-            player.setHealth(player.getMaxHealth());
-        }
+        player.setHealth(Math.min(player.getHealth() + SOUL_COST, player.getMaxHealth()));
 
-        if (output.isEmpty()) {
-            inventory.setStack(0, new ItemStack(ModItems.SOUL, 1));}
-        else {
-            output.increment(1);
-            inventory.markDirty();
-        }
-
-        sendContentUpdates();
-
-        return true;
+        output.decrement(1);
+        inventory.markDirty();
     }
-
 
     @Override
     public ItemStack quickMove(PlayerEntity player, int invSlot) {
@@ -140,6 +172,7 @@ public class SoulExtractorScreenHandler extends ScreenHandler {
                 if (!this.insertItem(originalStack, inventory.size(), slots.size(), true)) {
                     return ItemStack.EMPTY;
                 }
+
             } else {
                 if (!this.insertItem(originalStack, 0, inventory.size(), false)) {
                     return ItemStack.EMPTY;
@@ -156,12 +189,10 @@ public class SoulExtractorScreenHandler extends ScreenHandler {
         return newStack;
     }
 
-
     @Override
     public boolean canUse(PlayerEntity player) {
         return inventory.canPlayerUse(player);
     }
-
 
     private void addPlayerInventory(PlayerInventory playerInventory) {
         for (int i = 0; i < 3; ++i) {
@@ -171,20 +202,21 @@ public class SoulExtractorScreenHandler extends ScreenHandler {
         }
     }
 
-
     private void addPlayerHotbar(PlayerInventory playerInventory) {
         for (int i = 0; i < 9; ++i) {
             this.addSlot(new Slot(playerInventory, i, 8 + i * 18, 142));
         }
     }
 
-
     public boolean hasNotEnoughHealth() {
         return notEnoughHealth;
     }
 
-
     public boolean isOutputFull() {
         return outputFull;
+    }
+
+    public boolean hasNoSoul() {
+        return noSoul;
     }
 }

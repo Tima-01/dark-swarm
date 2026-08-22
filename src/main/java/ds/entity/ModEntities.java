@@ -28,7 +28,7 @@ public class ModEntities {
                     .build()
     );
     public static void registerModEntities() {
-        FabricDefaultAttributeRegistry.register(MINION, MinionEntity.createMinionAttributes());
+        FabricDefaultAttributeRegistry.register(ModEntities.MINION, MinionEntity.createMinionAttributes());
         FabricDefaultAttributeRegistry.register(ModEntities.SOUL_EATER, SoulEaterEntity.createAttributes());
     }
 }

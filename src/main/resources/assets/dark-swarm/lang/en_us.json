@@ -13,7 +13,6 @@
   "item.dark-swarm.fire_essence": "Fire essence",
   "item.dark-swarm.ice_essence": "Ice essence",
 
-
   "item.dark-swarm.soul_helmet": "Summoner's helmet",
   "item.dark-swarm.soul_chestplate": "Summoner's chestplate",
   "item.dark-swarm.soul_boots": "Summoner's boots",
@@ -38,16 +37,25 @@
   "effect.dark-swarm.freezing_presence": "Freezing presence",
 
   "block.dark-swarm.summoning_cauldron": "Summoning cauldron",
+  "block.dark-swarm.soul_extractor": "Soul extractor",
   "block.dark-swarm.inlay_table": "Inlay table",
   "block.dark-swarm.nether_spike": "Nether spike",
+  "block.dark-swarm.ice_spike": "Ice spike",
 
   "gui.dark-swarm.summoning_cauldron.summon": "Summon",
   "gui.dark-swarm.summoning_cauldron": "Summoning cauldron",
+  "gui.dark-swarm.soul_extractor": "Soul extractor",
   "gui.dark-swarm.inlay_table": "Inlay table",
   "gui.dark-swarm.affected_minions": "Affected creatures",
-  "gui.dark-swarm.summoning_cauldron.not_enough_health": "Not enough health",
+  "gui.dark-swarm.soul_extractor.not_enough_health": "Not enough health",
+  "gui.dark-swarm.soul_extractor.output_full": "Output is full",
+  "gui.dark-swarm.soul_extractor.no_soul": "No soul",
+  "gui.dark-swarm.soul_extractor.restore": "Restore",
+  "gui.dark-swarm.soul_extractor.extract": "Extract",
+  "gui.dark-swarm.summoning_cauldron.minion_title": "Ribbizabre",
+  "gui.dark-swarm.summoning_cauldron.minion_description": "Ribbizabre will desperately protect its master, even though it has almost no offencive capabilities. Surprisingly its somewhat cute.",
 
-  "entity.dark-swarm.minion": "Cute lil creature",
+  "entity.dark-swarm.minion": "Ribbizabre",
   "entity.dark-swarm.soul_eater": "Soul eater",
 
   "tooltip.dark-swarm.whip.tooltip": "Deals damage in fan-shaped area. Right click to select target for minions.",

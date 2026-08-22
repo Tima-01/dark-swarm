@@ -3,26 +3,18 @@ package ds.screen.custom;
 import ds.entity.ModEntities;
 import ds.item.ModItems;
 import ds.screen.ModScreenHandlers;
-import ds.util.MinionManager;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.entity.attribute.EntityAttributeInstance;
-import net.minecraft.entity.attribute.EntityAttributeModifier;
-import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.slot.Slot;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
-
-import java.util.UUID;
 
 public class SummoningCauldronScreenHandler extends ScreenHandler {
     private final Inventory inventory;
     private final BlockPos pos;
-    private boolean notEnoughHealth = false;
 
     public SummoningCauldronScreenHandler(int syncId, PlayerInventory playerInventory, BlockPos pos) {
         this(syncId, playerInventory, pos, playerInventory.player.getWorld().getBlockEntity(pos));
@@ -34,7 +26,17 @@ public class SummoningCauldronScreenHandler extends ScreenHandler {
         this.pos = pos;
         this.inventory = (Inventory) blockEntity;
 
-        this.addSlot(new Slot(inventory, 0, 92, 35));
+        this.addSlot(new Slot(inventory, 0, 92, 35) {
+            @Override
+            public boolean canInsert(ItemStack stack) {
+                return stack.isOf(ModItems.SOUL);
+            }
+
+            @Override
+            public int getMaxItemCount() {
+                return 64;
+            }
+        });
 
         addPlayerHotbar(playerInventory);
         addPlayerInventory(playerInventory);
@@ -42,47 +44,55 @@ public class SummoningCauldronScreenHandler extends ScreenHandler {
 
     @Override
     public boolean onButtonClick(PlayerEntity player, int id) {
-        if (id == 0) {
-            if (player.getWorld().isClient()) { return true; }
-            notEnoughHealth = false;
-            EntityAttributeInstance maxHealth = player.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH);
-            if (maxHealth == null) { return true; }
-            if (player.getMaxHealth() <= 1.0f) {
-                notEnoughHealth = true;
-                sendContentUpdates();
-                return true;
-            }
-            ItemStack stack = inventory.getStack(0);
-            if (!stack.isEmpty() && stack.getItem() == ModItems.SOUL) {
-                stack.decrement(1);
-                var world = player.getWorld();
-                var summon = ModEntities.MINION.create(world);
-                if (summon != null) {
-                    summon.refreshPositionAndAngles(
-                            pos.getX() + 0.5,
-                            pos.getY() + 1,
-                            pos.getZ() + 0.5,
-                            0,
-                            0
-                    );
-                    summon.setOwner(player);
-                    summon.setTamed(true, true);
-                    world.spawnEntity(summon);
-                }
-            }
-            sendContentUpdates();
+        if (id != 0) {
+            return super.onButtonClick(player, id);
+        }
+
+        if (player.getWorld().isClient()) {
             return true;
         }
-        return super.onButtonClick(player, id);
+
+        ItemStack stack = inventory.getStack(0);
+
+        if (stack.isEmpty() || !stack.isOf(ModItems.SOUL)) {
+            return true;
+        }
+
+        stack.decrement(1);
+        inventory.markDirty();
+
+        var world = player.getWorld();
+        var summon = ModEntities.MINION.create(world);
+
+        if (summon != null) {
+            summon.refreshPositionAndAngles(
+                    pos.getX() + 0.5,
+                    pos.getY() + 1,
+                    pos.getZ() + 0.5,
+                    0,
+                    0
+            );
+
+            summon.setOwner(player);
+            summon.setTamed(true, true);
+
+            world.spawnEntity(summon);
+        }
+
+        sendContentUpdates();
+
+        return true;
     }
 
     @Override
     public ItemStack quickMove(PlayerEntity player, int invSlot) {
         ItemStack newStack = ItemStack.EMPTY;
         Slot slot = this.slots.get(invSlot);
+
         if (slot != null && slot.hasStack()) {
             ItemStack originalStack = slot.getStack();
             newStack = originalStack.copy();
+
             if (invSlot < this.inventory.size()) {
                 if (!this.insertItem(originalStack, this.inventory.size(), this.slots.size(), true)) {
                     return ItemStack.EMPTY;
@@ -97,6 +107,7 @@ public class SummoningCauldronScreenHandler extends ScreenHandler {
                 slot.markDirty();
             }
         }
+
         return newStack;
     }
 
@@ -117,9 +128,5 @@ public class SummoningCauldronScreenHandler extends ScreenHandler {
         for (int i = 0; i < 9; ++i) {
             this.addSlot(new Slot(playerInventory, i, 8 + i * 18, 142));
         }
-    }
-
-    public boolean hasNotEnoughHealth() {
-        return notEnoughHealth;
     }
 }

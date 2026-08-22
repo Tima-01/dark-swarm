@@ -3,7 +3,6 @@ package ds.block.entity.custom;
 import ds.block.entity.ImplementedInventory;
 import ds.block.entity.ModBlockEntities;
 import ds.screen.custom.SoulExtractorScreenHandler;
-import ds.screen.custom.SummoningCauldronScreenHandler;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;

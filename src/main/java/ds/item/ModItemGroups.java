@@ -23,6 +23,7 @@ public class ModItemGroups {
                         entries.add(ModItems.ICE_ESSENCE);
                         entries.add(ModItems.FIRE_ESSENCE);
                         entries.add(ModBlocks.SUMMONING_CAULDRON);
+                        entries.add(ModBlocks.SOUL_EXTRACTOR);
                         entries.add(ModBlocks.INLAY_TABLE);
                         entries.add(ModBlocks.NETHER_SPIKE);
                         entries.add(ModBlocks.ICE_SPIKE);
