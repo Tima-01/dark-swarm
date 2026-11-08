@@ -7,7 +7,9 @@
     "BlazingAuraFireImmunityMixin",
     "ExampleMixin",
     "FreezingPresenceFreezeAttackMixin",
-    "FreezingPresenceFrostbiteImmunityMixin"
+    "FreezingPresenceFrostbiteImmunityMixin",
+    "LivingEntityDamageMixin",
+    "LivingEntityHealMixin"
   ],
   "client": [
     "ItemRendererMixin",

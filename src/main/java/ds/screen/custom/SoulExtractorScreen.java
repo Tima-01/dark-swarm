@@ -108,7 +108,6 @@ public class SoulExtractorScreen extends HandledScreen<SoulExtractorScreenHandle
         if (shakeTicks > 0)
             shakeTicks--;
 
-
         assert client != null;
 
         float health = client.player.getHealth();

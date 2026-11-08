@@ -25,19 +25,16 @@ import java.util.Map;
 /**
  * Handles custom armor buffs, that applies on the player*/
 public class ModArmorItem extends ArmorItem {
+
+    private final float bonusHealth;
+
     public ModArmorItem(RegistryEntry<ArmorMaterial> material, Type type, float bonusHealth, Settings settings) {
-        super(material, type, settings.component(DataComponentTypes.ATTRIBUTE_MODIFIERS, createHealthModifier(type, bonusHealth)));
+        super(material, type, settings);
+        this.bonusHealth = bonusHealth;
     }
 
-    private static AttributeModifiersComponent createHealthModifier(Type type, float health) {
-        return AttributeModifiersComponent.builder().add(
-            EntityAttributes.GENERIC_MAX_HEALTH,
-            new EntityAttributeModifier(
-                    Identifier.of("dark-swarm","armor_health_" + type.getName()),
-                    health,
-                    EntityAttributeModifier.Operation.ADD_VALUE
-            ),
-            AttributeModifierSlot.forEquipmentSlot(type.getEquipmentSlot())).build();
+    public float getBonusHealth() {
+        return bonusHealth;
     }
 
     public static final Map<RegistryEntry<ArmorMaterial>, List<StatusEffectInstance>> MATERIAL_TO_EFFECT_MAP =

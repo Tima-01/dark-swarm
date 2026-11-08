@@ -2,6 +2,7 @@ package ds.effects;
 
 import ds.DarkSwarm;
 import ds.effects.custom.BlazingAura;
+import ds.effects.custom.ArmorHealth;
 import ds.effects.custom.FreezingPresence;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
@@ -16,6 +17,9 @@ public class ModEffects {
 
     public static final RegistryEntry<StatusEffect> FREEZING_PRESENCE = registerStatusEffect("freezing_presence",
             new FreezingPresence(StatusEffectCategory.BENEFICIAL, 0x7ec8ff));
+
+    public static final RegistryEntry<StatusEffect> ARMOR_HEALTH = registerStatusEffect("armor_health",
+            new ArmorHealth(StatusEffectCategory.BENEFICIAL, 0x7ec8ff));
 
     private static RegistryEntry<StatusEffect> registerStatusEffect(String name, StatusEffect statusEffect) {
         return Registry.registerReference(Registries.STATUS_EFFECT, Identifier.of(DarkSwarm.MOD_ID, name), statusEffect);
