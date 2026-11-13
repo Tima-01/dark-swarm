@@ -1,39 +1,30 @@
 package ds.mixin;
 
-import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
-import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import ds.util.ArmorHealthManager;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.server.network.ServerPlayerEntity;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(LivingEntity.class)
-public class LivingEntityHealMixin {
-
-    @WrapMethod(method = "heal")
-    private void darkSwarm$heal(float amount, Operation<Void> original) {
+public abstract class LivingEntityHealMixin {
+    @Inject(method = "heal", at = @At("HEAD"), cancellable = true)
+    private void darkSwarm$healHealth(float amount, CallbackInfo ci) {
         LivingEntity entity = (LivingEntity) (Object) this;
+        if (!(entity instanceof ServerPlayerEntity player) || amount <= 0 || !player.isAlive()) return;
 
-        if (!(entity instanceof PlayerEntity player)) {
-            original.call(amount);
-            return;
-        }
+        float normalMissing = Math.max(0, player.getMaxHealth() - player.getHealth());
+        float normalHealed = Math.min(amount, normalMissing);
+        float remaining = amount - normalHealed;
 
-        if (player.getWorld().isClient()) {
-            original.call(amount);
-            return;
-        }
+        if (normalHealed > 0)
+            player.setHealth(player.getHealth() + normalHealed);
 
-        if (amount <= 0.0f) {
-            return;
-        }
+        if (remaining > 0)
+            ArmorHealthManager.heal(player, remaining);
 
-        float healedArmor = ArmorHealthManager.healArmorHealth(player, amount);
-
-        float remaining = amount - healedArmor;
-
-        if (remaining > 0.0f) {
-            original.call(remaining);
-        }
+        ci.cancel();
     }
 }

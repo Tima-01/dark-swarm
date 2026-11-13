@@ -8,12 +8,15 @@
     "ExampleMixin",
     "FreezingPresenceFreezeAttackMixin",
     "FreezingPresenceFrostbiteImmunityMixin",
-    "LivingEntityDamageMixin",
-    "LivingEntityHealMixin"
+    "HungerManagerMixin",
+    "LivingEntityHealMixin",
+    "PlayerEntityMixin",
+    "RegenerationStatusEffectMixin"
   ],
   "client": [
     "ItemRendererMixin",
-    "ModelLoaderMixin"
+    "ModelLoaderMixin",
+    "client.ArmorHealthHudMixin"
   ],
   "injectors": {
     "defaultRequire": 1

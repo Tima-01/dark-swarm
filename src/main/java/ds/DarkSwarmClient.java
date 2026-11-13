@@ -9,17 +9,23 @@ import ds.entity.client.MinionRenderer;
 import ds.entity.client.SoulEaterRenderer;
 import ds.item.ModItems;
 import ds.item.custom.ModArmorRenderer;
+import ds.network.ArmorHealthS2CPayload;
 import ds.screen.ModScreenHandlers;
 import ds.screen.custom.InlayTableScreen;
 import ds.screen.custom.SoulExtractorScreen;
 import ds.screen.custom.SummoningCauldronScreen;
+import ds.util.ArmorHealthAccess;
 import ds.util.ArmorUtil;
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.client.rendering.v1.ArmorRenderer;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
+import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.minecraft.client.gui.screen.ingame.HandledScreens;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
+
+import java.util.Objects;
 
 public class DarkSwarmClient implements ClientModInitializer {
     @Override
@@ -52,5 +58,11 @@ public class DarkSwarmClient implements ClientModInitializer {
         ArmorUtil.registerEnhancementPredicate(ModItems.SUMMONER_DIAMOND_CHESTPLATE, "ice_enhanced");
 
         ArmorRenderer.register(new ModArmorRenderer(), ModItems.SOUL_CHESTPLATE, ModItems.SUMMONER_DIAMOND_CHESTPLATE, ModItems.SUMMONER_GOLD_CHESTPLATE, ModItems.SUMMONER_IRON_CHESTPLATE);
+        ClientPlayNetworking.registerGlobalReceiver(ArmorHealthS2CPayload.ID, (payload, context) -> {
+            context.client().execute(() -> {
+                if (context.client().player != null)
+                    ((ArmorHealthAccess) Objects.requireNonNull(context.client().player)).dark_swarm$setArmorHealth(payload.health());
+            });
+        });
     }
 }
